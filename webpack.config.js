@@ -21,11 +21,11 @@ module.exports = {
                 use: ["style-loader", "css-loader"],
             },
             {
-                test: /\.(jpg|jpeg|png|gif|mp3|svg)$/i,
+                test: /\.(jpg|jpeg|png|gif|woff|woff2|eot|ttf|svg|gif|mp3)$/i,
                 use: ["file-loader"]
             },
             {
-                test: /\.(jpg|png|gif|jpeg|woff|woff2|eot|ttf|svg)$/i,
+                test: /\.(jpg|jpeg|png|gif|woff|woff2|eot|ttf|svg|gif|mp3)$/i,
                 use: [{
                     loader: "url-loader",
                     options: {
