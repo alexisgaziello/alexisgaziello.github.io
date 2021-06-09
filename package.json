@@ -1,0 +1,39 @@
+{
+  "name": "filters",
+  "version": "1.0.0",
+  "description": "Filters website",
+  "main": "index.js",
+  "scripts": {
+    "test": "bash run-tests.sh",
+    "build": "webpack",
+    "start": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexisgaziello/filters.git"
+  },
+  "author": "Alexis Gaziello",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexisgaziello/filters/issues"
+  },
+  "homepage": "https://github.com/alexisgaziello/filters#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.1",
+    "path": "^0.12.7",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
