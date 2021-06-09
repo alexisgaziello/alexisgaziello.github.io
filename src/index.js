@@ -1,14 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
 
-const HelloWorld = () => {
-    return (
-        <h1>
-            Hello World
-        </h1>
-    );
-}
+import Main from "./Main.jsx";
 
-ReactDOM.render(<HelloWorld />, document.getElementById("root"));
+ReactDOM.render(<Main />, document.getElementById("root"));
