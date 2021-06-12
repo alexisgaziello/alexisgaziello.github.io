@@ -3,11 +3,14 @@ import React from 'react';
 import About from './components/About.jsx'
 import Filters from './components/Filters.jsx'
 import Home from './components/Home.jsx'
+import "semantc-ui-css/semantic.min.css";
+
 
 import {
   Menu,
   Container,
   Dropdown,
+  Flag,
   Icon,
 } from 'semantic-ui-react'
 
@@ -45,11 +48,10 @@ const App = () => {
                 />
                 
                 <Menu.Menu position='right'>
-                <Dropdown item text='Language'>
+                <Dropdown icon='world' text='Language' item>
                     <Dropdown.Menu>
                         <Dropdown.Item>English</Dropdown.Item>
-                        <Dropdown.Item>Russian</Dropdown.Item>
-                        <Dropdown.Item>Spanish</Dropdown.Item>
+                        <Dropdown.Item>Español</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
                 </Menu.Menu>
