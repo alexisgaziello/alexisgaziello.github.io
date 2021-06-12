@@ -1,5 +1,10 @@
 import React from 'react';
-import { container } from 'semantic-ui-react';
+import {
+  Container,
+  Segment,
+  Form,
+  Radio,
+ } from 'semantic-ui-react';
 
 const Filters = () => {
 
@@ -12,7 +17,7 @@ const Filters = () => {
 
       </Container>
 
-      <Container>
+      <Segment>
         <h2>Tonalidad</h2>
         <Form>
           <Form.Field>
@@ -37,7 +42,7 @@ const Filters = () => {
             />
           </Form.Field>
         </Form>
-      </Container>
+      </Segment>
     </div>
   );
 }

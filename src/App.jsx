@@ -3,6 +3,7 @@ import React from 'react';
 import About from './components/About.jsx'
 import Filters from './components/Filters.jsx'
 import Home from './components/Home.jsx'
+import NotFoundPage from './components/NotFoundPage.jsx'
 
 
 import {
@@ -60,15 +61,10 @@ const App = () => {
 
 
             <Switch>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route path="/about">
-                    <About />
-                </Route>
-                <Route path="/filters">
-                    <Filters />
-                </Route>
+                <Route exact path="/" component={Home} />
+                <Route path="/about" component={About} />
+                <Route path="/filters" component={Filters} />
+                <Route component={NotFoundPage} />
             </Switch>
         </div>
 
