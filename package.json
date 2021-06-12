@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "bash run-tests.sh",
-    "build": "npm run build-dev --open",
+    "build": "npm run build-dev",
     "build-dev": "webpack --mode=development",
     "build-prod": "webpack --mode=production",
     "start": "webpack serve"
@@ -33,6 +33,7 @@
     "node-sass": "^5.0.0",
     "path": "^0.12.7",
     "sass-loader": "^12.0.0",
+    "style-loader": "^2.0.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.2",
@@ -47,7 +48,6 @@
     "react-ga": "^3.3.0",
     "react-router-dom": "^5.2.0",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.0.3",
-    "style-loader": "^2.0.0"
+    "semantic-ui-react": "^2.0.3"
   }
 }

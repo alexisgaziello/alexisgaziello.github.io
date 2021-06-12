@@ -10,7 +10,7 @@ module.exports = {
     output: { path: path.join(__dirname, "build"), filename: "index.bundle.js" },
     mode: process.env.NODE_ENV || "development",
     resolve: {
-        modules: [path.resolve(__dirname, "src"), "node_modules"]
+        modules: [path.resolve(__dirname, "src"), "node_modules"],
     },
     devServer: { contentBase: path.join(__dirname, "src") },
     module: {
@@ -25,6 +25,10 @@ module.exports = {
                 use: ["style-loader", "css-loader"],
             },
             {
+                test: /\.sass$/i,
+                use: ["sass-loader", "style-loader", "css-loader"]
+            },
+            {
                 test: /\.(jpg|jpeg|png|gif|woff|woff2|eot|ttf|svg|gif|mp3)$/i,
                 use: ["file-loader"]
             },
@@ -37,10 +41,6 @@ module.exports = {
                     }
                 }]
             },
-            {
-                test: /\.sass$/i,
-                use: ["sass-loader", "style-loader", "css-loader"]
-            }
         ],
     },
     plugins: [

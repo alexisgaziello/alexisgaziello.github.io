@@ -3,7 +3,6 @@ import React from 'react';
 import About from './components/About.jsx'
 import Filters from './components/Filters.jsx'
 import Home from './components/Home.jsx'
-import "semantc-ui-css/semantic.min.css";
 
 
 import {
