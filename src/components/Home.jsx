@@ -16,6 +16,8 @@ import {
 
 import { useHistory } from "react-router-dom";
 
+
+
 const Home = () => {
   const history = useHistory();
 
@@ -47,7 +49,7 @@ const Home = () => {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column textAlign='center'>
-              <Button size='huge' onClick={() => { history.push("/filters")} } >Personaliza tu filtro!</Button>
+              <Button size='huge' onClick={() => { history.push("/filters") }} >Personaliza tu filtro!</Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>

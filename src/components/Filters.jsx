@@ -83,6 +83,12 @@ const Filters = () => {
           tryLink="https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg"
           initialSliderValue={30}
         />
+
+        <br />
+
+        <Button>
+          Checkout
+        </Button>
       </Container>
 
     </div>
