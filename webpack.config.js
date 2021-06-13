@@ -1,9 +1,11 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require('webpack');
-const dotenv = require('dotenv').config( {
+const dotenv = require('dotenv').config({
     path: path.join(__dirname, '.env')
-  } );
+});
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 
 module.exports = {
     entry: path.join(__dirname, "src", "index.js"),
@@ -14,6 +16,12 @@ module.exports = {
     },
     mode: process.env.NODE_ENV || "development",
     resolve: {
+        alias: {
+            '../../theme.config$': path.join(
+                __dirname,
+                '/src/theme/theme.config',
+            ),
+        },
         modules: [path.resolve(__dirname, "src"), "node_modules"],
     },
     devServer: {
@@ -40,13 +48,23 @@ module.exports = {
                 use: ["file-loader"]
             },
             {
-                test: /\.(jpg|jpeg|png|gif|woff|woff2|eot|ttf|svg|gif|mp3)$/i,
+                test: /\.(jpg|jpeg|png|gif|svg|gif|mp3)$/i,
                 use: [{
                     loader: "url-loader",
                     options: {
                         limit: 8192 // in bytes
                     }
                 }]
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                    },
+                    'css-loader',
+                    'less-loader',
+                ],
             },
         ],
     },
@@ -56,6 +74,9 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             "process.env": JSON.stringify(dotenv.parsed)
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'styles/[name].[contenthash].css',
         }),
     ],
     devtool: "source-map",
