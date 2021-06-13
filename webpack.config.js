@@ -58,4 +58,5 @@ module.exports = {
             "process.env": JSON.stringify(dotenv.parsed)
         }),
     ],
+    devtool: "source-map",
 };
