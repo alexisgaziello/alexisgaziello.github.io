@@ -26,6 +26,12 @@ const Home = () => {
     <Container>
 
       <Segment style={{ padding: '8em 0em' }} vertical>
+      <Header as='h1' style={{ fontSize: '25vw', fontFamily: "Billabong"}} textAlign="center">
+                filters
+            </Header>
+      </Segment>
+
+      <Segment style={{ padding: '8em 0em' }} vertical>
         <Grid container stackable verticalAlign='middle'>
           <Grid.Row>
             <Grid.Column width={8}>
