@@ -32,6 +32,30 @@ export default class QuestionSlider extends Component {
     render() {
         const { yes_active, no_active, sliderValue } = this.state
 
+        const slider = (
+            <Grid>
+                <Grid.Column width={6}>
+                    <Slider color="green" inverted={false}
+                        settings={{
+                            start: sliderValue,
+                            min: 0,
+                            max: 100,
+                            step: 1,
+                            onChange: (value) => {
+                                this.setState({
+                                    sliderValue: value
+                                })
+                            }
+                        }} />
+                </Grid.Column>
+
+                <Grid.Column width={1}>
+                    <Label color="green">{this.state.sliderValue}</Label>
+                </Grid.Column>
+
+            </Grid>
+        )
+
         return (
             <Segment>
                 <h1>{this.props.title}</h1>
@@ -44,28 +68,7 @@ export default class QuestionSlider extends Component {
                     </Grid.Column>
 
                     <Grid.Column width={10}>
-
-                        <Grid>
-                            <Grid.Column width={6}>
-                                <Slider color="red" inverted={false}
-                                    settings={{
-                                        start: this.state.sliderValue,
-                                        min: 0,
-                                        max: 100,
-                                        step: 1,
-                                        onChange: (value) => {
-                                            this.setState({
-                                                sliderValue: value
-                                            })
-                                        }
-                                    }} />
-                            </Grid.Column>
-
-                            <Grid.Column width={1}>
-                                <Label color="red">{this.state.sliderValue}</Label>
-                            </Grid.Column>
-
-                        </Grid>
+                        {yes_active ? slider : null}
 
                     </Grid.Column>
                 </Grid>

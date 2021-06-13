@@ -88,7 +88,7 @@ const App = () => {
                 <Container>
                     <Grid divided inverted stackable>
                         <Grid.Row>
-                            <Grid.Column width={7}>
+                            <Grid.Column width={12}>
                                 <Header as='h4' inverted>
                                     Footer Header
                                 </Header>
@@ -96,7 +96,7 @@ const App = () => {
                                     Extra space for a call to action inside the footer that could help re-engage users.
                                 </p>
                             </Grid.Column>
-                            <Grid.Column width={3} right>
+                            <Grid.Column width={4}>
                                 <Header inverted as='h4' content='About' />
                                 <List link inverted>
                                     <List.Item>
