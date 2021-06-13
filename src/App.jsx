@@ -7,11 +7,11 @@ import NotFoundPage from './components/NotFoundPage.jsx'
 
 
 import {
-  Menu,
-  Container,
-  Dropdown,
-  Flag,
-  Icon,
+    Menu,
+    Container,
+    Dropdown,
+    Flag,
+    Icon,
 } from 'semantic-ui-react'
 
 import {
@@ -20,7 +20,14 @@ import {
     Link,
     useLocation,
     useHistory,
-  } from "react-router-dom";
+} from "react-router-dom";
+
+
+const languageOptions = [
+    { key: 'English', text: 'English', value: 'English', flag: "uk" },
+    { key: 'Spanish', text: 'Spanish', value: 'Spanish', flag: "es" },
+    { key: 'French', text: 'French', value: 'French', flag: "fr" },
+  ]
 
 const App = () => {
     const location = useLocation();
@@ -30,33 +37,37 @@ const App = () => {
         <div>
 
             <Menu>
-            <Container>
-                <Menu.Item
-                    name='Home'
-                    active={location.pathname === '/'}
-                    onClick={() => {history.push("/")}}
+                <Container>
+                    <Menu.Item
+                        name='Home'
+                        active={location.pathname === '/'}
+                        onClick={() => { history.push("/") }}
                     />
-                <Menu.Item
-                    name='Filters'
-                    active={location.pathname === '/filters'}
-                    onClick={() => {history.push("/filters")}}
-                />
-                <Menu.Item
-                    name='About'
-                    active={location.pathname === '/about'}
-                    onClick={() => {history.push("/about")}}
-                />
-                
-                <Menu.Menu position='right'>
-                <Dropdown icon='world' text='Language' item>
-                    <Dropdown.Menu>
-                        <Dropdown.Item>English</Dropdown.Item>
-                        <Dropdown.Item>Español</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-                </Menu.Menu>
+                    <Menu.Item
+                        name='Filters'
+                        active={location.pathname === '/filters'}
+                        onClick={() => { history.push("/filters") }}
+                    />
+                    <Menu.Item
+                        name='About'
+                        active={location.pathname === '/about'}
+                        onClick={() => { history.push("/about") }}
+                    />
 
-            </Container>
+                    <Menu.Menu position='right'>
+                        <Dropdown
+                            button
+                            className='icon'
+                            floating
+                            labeled
+                            icon='world'
+                            options={languageOptions}
+                            search
+                            text='Language'
+                        />
+                    </Menu.Menu>
+
+                </Container>
             </Menu>
 
 
