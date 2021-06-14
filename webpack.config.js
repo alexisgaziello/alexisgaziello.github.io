@@ -48,15 +48,6 @@ module.exports = {
                 use: ["file-loader"]
             },
             {
-                test: /\.(jpg|jpeg|png|gif|svg|gif|mp3)$/i,
-                use: [{
-                    loader: "url-loader",
-                    options: {
-                        limit: 8192 // in bytes
-                    }
-                }]
-            },
-            {
                 test: /\.less$/,
                 use: [
                     {
