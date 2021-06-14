@@ -17,6 +17,7 @@ export default class QuestionSlider extends Component {
         no_active: false,
         sliderValue: this.props.initialSliderValue,
     };
+    
     handleClickYes = () =>
         this.setState(() => ({
             yes_active: true,
@@ -33,44 +34,45 @@ export default class QuestionSlider extends Component {
         const { yes_active, no_active, sliderValue } = this.state
 
         const slider = (
-            <Grid>
-                <Grid.Column width={6}>
-                    <Slider color="green" inverted={false}
-                        settings={{
-                            start: sliderValue,
-                            min: 0,
-                            max: 100,
-                            step: 1,
-                            onChange: (value) => {
-                                this.setState({
-                                    sliderValue: value
-                                })
-                            }
-                        }} />
+            <Grid.Column width={12}>
+                <Grid columns={2}>
+                <Grid.Column width={12}>
+                <Slider color="green" inverted={false}
+                    settings={{
+                        start: sliderValue,
+                        min: 0,
+                        max: 100,
+                        step: 1,
+                        onChange: (value) => {
+                            this.setState({
+                                sliderValue: value
+                            })
+                        }
+                    }} />
+                </Grid.Column>
+                <Grid.Column width={4}>
+
+                <Label color="green">{this.state.sliderValue}</Label>
                 </Grid.Column>
 
-                <Grid.Column width={1}>
-                    <Label color="green">{this.state.sliderValue}</Label>
-                </Grid.Column>
+                </Grid>
 
-            </Grid>
+
+            </Grid.Column>
         )
 
         return (
             <Segment>
                 <h1>{this.props.title}</h1>
-                <Grid>
-                    <Grid.Column width={1}>
+                <Grid stackable columns={2}>
+                    <Grid.Column width={4}>
                         <Button content='Sí' toggle active={yes_active} onClick={this.handleClickYes} />
-                    </Grid.Column>
-                    <Grid.Column width={1}>
                         <Button content='No' toggle active={no_active} onClick={this.handleClickNo} />
                     </Grid.Column>
 
-                    <Grid.Column width={10}>
-                        {yes_active ? slider : null}
+                    {yes_active ? slider : null}
 
-                    </Grid.Column>
+
                 </Grid>
                 <br />
                 <Button animated='fade' onClick={() => window.open(this.props.tryLink, '_blank')}>
