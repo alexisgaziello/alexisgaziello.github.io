@@ -25,7 +25,7 @@ const NotFoundPage = () => {
     <Container>
       <Segment style={{ padding: '8em 0em' }} vertical>
         {/* TODO: change color to global variable */}
-        <Header as='h1' style={{ fontSize: '15vw', fontFamily: "Billabong", color: "#85e2ff" }} textAlign="center">
+        <Header as='h1' style={{ fontSize: 'min(15vw, 200px)', fontFamily: "Billabong", color: "#85e2ff" }} textAlign="center">
           page not found
         </Header>
         <br />

@@ -26,7 +26,7 @@ const Home = () => {
     <Container>
 
       <Segment style={{ padding: '8em 0em' }} vertical>
-      <Header as='h1' style={{ fontSize: '20vw', fontFamily: "Billabong", color: "#85e2ff" }} textAlign="center">
+      <Header as='h1' style={{ fontSize: 'min(20vw, 300px)', fontFamily: "Billabong", color: "#85e2ff" }} textAlign="center">
                 filters
             </Header>
       </Segment>
