@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Papa from 'papaparse';
+
 import {
   Container,
   Segment,
@@ -6,10 +8,29 @@ import {
   Radio,
   Button,
   Icon,
+  Grid,
 } from 'semantic-ui-react';
 
 import RadioOptions from './filters/RadioOptions.jsx'
 import QuestionSlider from './filters/QuestionSlider.jsx'
+
+
+
+import questionsConfig from '../data/questions.csv'
+
+function loadQuestions() {
+  const questionsComponents = []
+  questionsConfig.forEach( questionConfig => questionsComponents.push(
+    <QuestionSlider key={questionConfig.title}
+      title={questionConfig.title}
+      tryLink={questionConfig.tryLink}
+      initialSliderValue={questionConfig.initialSliderValue}
+    />
+    )
+  )
+  return questionsComponents
+}
+
 
 const tonalidad = [
   {
@@ -78,17 +99,16 @@ const Filters = () => {
           tryLink="https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg"
         />
 
-        <QuestionSlider
-          title="Te quitamos las ojeras?"
-          tryLink="https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg"
-          initialSliderValue={30}
-        />
+        {loadQuestions()}
 
         <br />
 
-        <Button>
-          Checkout
-        </Button>
+        <Grid>
+          <Grid.Column textAlign="center">
+            <Button>Check out!</Button>
+          </Grid.Column>
+        </Grid>
+
       </Container>
 
     </div>

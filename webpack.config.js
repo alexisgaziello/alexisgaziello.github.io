@@ -66,6 +66,15 @@ module.exports = {
                     'less-loader',
                 ],
             },
+            {
+                test: /\.csv$/,
+                loader: 'csv-loader',
+                options: {
+                  dynamicTyping: true,
+                  header: true,
+                  skipEmptyLines: true
+                }
+              }
         ],
     },
     plugins: [
@@ -80,4 +89,5 @@ module.exports = {
         }),
     ],
     devtool: "source-map",
+    target: 'node',
 };
