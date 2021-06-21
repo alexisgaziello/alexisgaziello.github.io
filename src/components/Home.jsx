@@ -26,7 +26,7 @@ const Home = () => {
   const history = useHistory();
 
   return (
-    <Container>
+    <div>
 
       <Segment style={{ padding: '8em 0em' }} vertical>
         {/* # TODO: check color */}
@@ -58,26 +58,26 @@ const Home = () => {
               <div style={{ minHeight: "400px" }}>
 
                 <motion.div animate={{ y: 15 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }} initial={{ y: 10 }} >
-                  <motion.div whileHover={{ scale: 1.1 }} >
+                  <motion.div whileHover={{ scale: 1.12 }} >
                     <Image
                       src={"../assets/images/iphone_filters/filtro_brillante.png"}
-                      style={{ position: "absolute", bottom: -410, right: "65%", maxHeight: 400  }}
+                      style={{ position: "absolute", bottom: -410, right: "65%", maxHeight: 400, boxShadow: "10px 20px 40px #303030" }}
                     />
                   </motion.div>
                 </motion.div>
                 <motion.div animate={{ y: 15 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }} initial={{ y: 5 }} >
-                  <motion.div whileHover={{ scale: 1.1 }} >
+                  <motion.div whileHover={{ scale: 1.12 }} >
                     <Image
                       src={"../assets/images/iphone_filters/filtro_abeja.png"}
-                      style={{ position: "absolute", bottom: -400, right: "40%", maxHeight: 400 }}
+                      style={{ position: "absolute", bottom: -400, right: "35%", maxHeight: 400, boxShadow: "10px 20px 40px #303030" }}
                     />
                   </motion.div>
                 </motion.div>
                 <motion.div animate={{ y: 15 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }} initial={{ y: 8 }} >
-                  <motion.div whileHover={{ scale: 1.1 }} >
+                  <motion.div whileHover={{ scale: 1.12 }} >
                     <Image
                       src={"../assets/images/iphone_filters/filtro_moreno.png"}
-                      style={{ position: "absolute", bottom: -420, right: "10%", maxHeight: 400  }}
+                      style={{ position: "absolute", bottom: -420, right: "5%", maxHeight: 400, boxShadow: "10px 20px 40px #303030" }}
                     />
                   </motion.div>
                 </motion.div>
@@ -153,7 +153,7 @@ const Home = () => {
       </Segment>
 
 
-    </Container>
+    </div>
 
   );
 }
