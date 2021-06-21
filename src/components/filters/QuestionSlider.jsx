@@ -10,6 +10,8 @@ import {
 } from 'semantic-ui-react';
 import { Slider } from "react-semantic-ui-range";
 
+import { blue, pink, yellow } from "../../constants.js"
+const colors = [blue, pink, yellow];
 
 export default class QuestionSlider extends Component {
     state = {
@@ -33,11 +35,15 @@ export default class QuestionSlider extends Component {
     render() {
         const { yes_active, no_active, sliderValue } = this.state
 
+        const max = colors.length;
+        const randomInt = Math.floor(Math.random() * max)
+        const color = colors[randomInt]
+        console.log(color)
         const slider = (
             <Grid.Column width={12}>
                 <Grid columns={2}>
                 <Grid.Column width={12}>
-                <Slider color="green" inverted={false}
+                <Slider color={color} inverted={false}
                     settings={{
                         start: sliderValue,
                         min: 0,
@@ -63,7 +69,7 @@ export default class QuestionSlider extends Component {
 
         return (
             <Segment>
-                <h1>{this.props.title}</h1>
+                <h1 style={{color: color}}>{this.props.title}</h1>
                 <Grid stackable columns={2}>
                     <Grid.Column width={4}>
                         <Button content='Sí' toggle active={yes_active} onClick={this.handleClickYes} />

@@ -119,7 +119,7 @@ const App = () => {
                                     <List.Item>
                                         <List.Icon name='instagram' />
                                         <List.Content>
-                                            <a href='https://www.instagram.com/danielbetancort/?hl=en'>Instagram</a>
+                                            <a href='https://www.instagram.com/filter_es/?hl=en'>Instagram</a>
                                         </List.Content>
                                     </List.Item>
                                 </List>

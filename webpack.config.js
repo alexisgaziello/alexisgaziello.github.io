@@ -36,12 +36,12 @@ module.exports = {
                 use: ["babel-loader"]
             },
             {
-                test: /\.(css|scss)$/i,
+                test: /\.(css)$/i,
                 use: ["style-loader", "css-loader"],
             },
             {
-                test: /\.sass$/i,
-                use: ["sass-loader", "style-loader", "css-loader"]
+                test: /\.s[ac]ss$/i,
+                use: ["style-loader", "css-loader", "sass-loader"]
             },
             {
                 test: /\.(jpg|jpeg|png|gif|woff|woff2|eot|ttf|svg|gif|mp3)$/i,
