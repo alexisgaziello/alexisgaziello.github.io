@@ -82,7 +82,7 @@ const App = () => {
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />
                 <Route path="/filters" component={Filters} />
-                <Route component={NotFoundPage} />
+                {/* <Route component={NotFoundPage} /> */}
             </Switch>
 
             <br />
