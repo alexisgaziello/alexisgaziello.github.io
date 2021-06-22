@@ -53,14 +53,14 @@ const Home = () => {
                 Algo más de texto que no se que poner ahora.
               </p>
             </Grid.Column>
-            <Grid.Column floated='right' width={7}>
-              <div style={{ minHeight: "400px" }}>
+            <Grid.Column floated='right' width={8}>
+              <div style={{ minHeight: "min(400px, 60vw)" }}>
 
                 <motion.div animate={{ y: 15 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }} initial={{ y: 10 }} >
                   <motion.div whileHover={{ scale: 1.12 }} >
                     <Image
                       src={"../images/iphone_filters/filtro_brillante.png"}
-                      style={{ position: "absolute", bottom: -410, right: "65%", maxHeight: 400, boxShadow: "10px 20px 40px #303030" }}
+                      style={{ position: "absolute", bottom: -380, right: "65%", maxHeight: "min(350px, 60vw)", boxShadow: "10px 20px 40px #303030" }}
                     />
                   </motion.div>
                 </motion.div>
@@ -68,7 +68,7 @@ const Home = () => {
                   <motion.div whileHover={{ scale: 1.12 }} >
                     <Image
                       src={"../images/iphone_filters/filtro_abeja.png"}
-                      style={{ position: "absolute", bottom: -400, right: "35%", maxHeight: 400, boxShadow: "10px 20px 40px #303030" }}
+                      style={{ position: "absolute", bottom: -370, right: "35%", maxHeight: "min(350px, 60vw)", boxShadow: "10px 20px 40px #303030" }}
                     />
                   </motion.div>
                 </motion.div>
@@ -76,7 +76,7 @@ const Home = () => {
                   <motion.div whileHover={{ scale: 1.12 }} >
                     <Image
                       src={"../images/iphone_filters/filtro_moreno.png"}
-                      style={{ position: "absolute", bottom: -420, right: "5%", maxHeight: 400, boxShadow: "10px 20px 40px #303030" }}
+                      style={{ position: "absolute", bottom: -390, right: "5%", maxHeight: "min(350px, 60vw)", boxShadow: "10px 20px 40px #303030" }}
                     />
                   </motion.div>
                 </motion.div>
