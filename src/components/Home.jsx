@@ -36,22 +36,21 @@ const Home = () => {
       </Segment>
 
       <Segment style={{ padding: '8em 0em', backgroundImage: `url(${"../images/backgrounds/amarillo_bola_rosa.png"})`, backgroundRepeat: "repeat" }} vertical>
-        <Grid container stackable verticalAlign='middle'>
+        <Grid container stackable verticalAlign='middle' >
           <Grid.Row>
             <Grid.Column width={8}>
-              <Header as='h3' style={{ fontSize: '2em' }}>
+              <Header as='h3' style={{ fontSize: '5em', fontFamily: "Windsor" }}>
                 Te ayudamos a crecer
               </Header>
               <p style={{ fontSize: '1.33em' }}>
-                Añade un filtro personalizado a tu cuenta de Instagram para volverla única. Consigue un mayor alcance
+                Añade un filtro personalizado a tu Instagram que hará tu cuenta única. Consigue un mayor alcance
                 y deja a tus seguidores boquiabiertos con un filtro que nunca han visto.
               </p>
-              <Header as='h3' style={{ fontSize: '2em' }}>
+              <Header as='h3' style={{ fontSize: '5em', fontFamily: "Windsor" }}>
                 Libertad y personalización
               </Header>
               <p style={{ fontSize: '1.33em' }}>
-                Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-                made into filters.
+                Algo más de texto que no se que poner ahora.
               </p>
             </Grid.Column>
             <Grid.Column floated='right' width={7}>
@@ -85,9 +84,20 @@ const Home = () => {
 
             </Grid.Column>
           </Grid.Row>
+
+          <Grid.Row>
+
+          <br />
+          <br />
+          <br />
+
+          </Grid.Row>
+
           <Grid.Row>
             <Grid.Column textAlign='center'>
-              <Button size='huge' onClick={() => { history.push("/filters") }} >Personaliza tu filtro!</Button>
+              <Button size='huge' onClick={() => { history.push("/filters") }} style={{ backgroundColor: pink}} >
+                Personaliza tu filtro!
+              </Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
