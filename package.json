@@ -28,9 +28,11 @@
     "@babel/preset-react": "^7.13.13",
     "@neocoast/semantic-ui-less": "^2.5.0",
     "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
     "css-loader": "^5.2.6",
     "csv-loader": "^3.0.3",
     "file-loader": "^6.2.0",
+    "html-beautify-webpack-plugin": "^1.0.5",
     "html-webpack-plugin": "^5.3.1",
     "less": "^4.1.1",
     "less-loader": "^9.1.0",
@@ -42,7 +44,10 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-manifest-plugin": "^3.1.1",
+    "webpack-nano": "^1.1.1",
+    "webpack-subresource-integrity": "^1.5.2"
   },
   "dependencies": {
     "@artsy/fresnel": "^1.7.0",

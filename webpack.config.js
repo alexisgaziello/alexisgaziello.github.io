@@ -1,6 +1,8 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require('webpack');
+const path = require("path");
+
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const dotenv = require('dotenv').config({
     path: path.join(__dirname, '.env')
 });
@@ -8,13 +10,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = {
+    mode: process.env.NODE_ENV || "development",
     entry: path.join(__dirname, "src", "index.js"),
     output: {
-        path: path.join(__dirname, "build"),
+        path: path.join(__dirname, "dist"),
         filename: "index.bundle.js",
         publicPath: '/',
     },
-    mode: process.env.NODE_ENV || "development",
     resolve: {
         alias: {
             '../../theme.config$': path.join(
@@ -25,9 +27,22 @@ module.exports = {
         modules: [path.resolve(__dirname, "src"), "node_modules"],
     },
     devServer: {
-        contentBase: path.join(__dirname, "src"),
+        contentBase: path.join(__dirname, "dist"),
         historyApiFallback: true,
+        writeToDisk: true,
     },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, "src", "index.html"),
+        }),
+        new webpack.DefinePlugin({
+            "process.env": JSON.stringify(dotenv.parsed)
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'styles/[name].[contenthash].css',
+        }),
+    ],
     module: {
         rules: [
             {
@@ -68,17 +83,6 @@ module.exports = {
               }
         ],
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, "src", "index.html"),
-        }),
-        new webpack.DefinePlugin({
-            "process.env": JSON.stringify(dotenv.parsed)
-        }),
-        new MiniCssExtractPlugin({
-            filename: 'styles/[name].[contenthash].css',
-        }),
-    ],
     devtool: "source-map",
     target: 'node',
 };
