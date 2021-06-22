@@ -35,7 +35,7 @@ const Home = () => {
         </Header>
       </Segment>
 
-      <Segment style={{ padding: '8em 0em', backgroundImage: `url(${"../assets/images/backgrounds/amarillo_bola_rosa.png"})`, backgroundRepeat: "repeat" }} vertical>
+      <Segment style={{ padding: '8em 0em', backgroundImage: `url(${"../images/backgrounds/amarillo_bola_rosa.png"})`, backgroundRepeat: "repeat" }} vertical>
         <Grid container stackable verticalAlign='middle'>
           <Grid.Row>
             <Grid.Column width={8}>
@@ -60,7 +60,7 @@ const Home = () => {
                 <motion.div animate={{ y: 15 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }} initial={{ y: 10 }} >
                   <motion.div whileHover={{ scale: 1.12 }} >
                     <Image
-                      src={"../assets/images/iphone_filters/filtro_brillante.png"}
+                      src={"../images/iphone_filters/filtro_brillante.png"}
                       style={{ position: "absolute", bottom: -410, right: "65%", maxHeight: 400, boxShadow: "10px 20px 40px #303030" }}
                     />
                   </motion.div>
@@ -68,7 +68,7 @@ const Home = () => {
                 <motion.div animate={{ y: 15 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }} initial={{ y: 5 }} >
                   <motion.div whileHover={{ scale: 1.12 }} >
                     <Image
-                      src={"../assets/images/iphone_filters/filtro_abeja.png"}
+                      src={"../images/iphone_filters/filtro_abeja.png"}
                       style={{ position: "absolute", bottom: -400, right: "35%", maxHeight: 400, boxShadow: "10px 20px 40px #303030" }}
                     />
                   </motion.div>
@@ -76,7 +76,7 @@ const Home = () => {
                 <motion.div animate={{ y: 15 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }} initial={{ y: 8 }} >
                   <motion.div whileHover={{ scale: 1.12 }} >
                     <Image
-                      src={"../assets/images/iphone_filters/filtro_moreno.png"}
+                      src={"../images/iphone_filters/filtro_moreno.png"}
                       style={{ position: "absolute", bottom: -420, right: "5%", maxHeight: 400, boxShadow: "10px 20px 40px #303030" }}
                     />
                   </motion.div>

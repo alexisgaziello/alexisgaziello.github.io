@@ -2,11 +2,14 @@ const webpack = require('webpack');
 const path = require("path");
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const SriPlugin = require('webpack-subresource-integrity');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const dotenv = require('dotenv').config({
     path: path.join(__dirname, '.env')
 });
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 
 module.exports = {
@@ -33,6 +36,7 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
+        new WebpackManifestPlugin(),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "src", "index.html"),
         }),
@@ -42,6 +46,15 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'styles/[name].[contenthash].css',
         }),
+        new SriPlugin({
+            hashFuncNames: ['sha256', 'sha384'],
+            enabled: process.env.NODE_ENV === 'production',
+        }),
+        new CopyPlugin({
+            patterns: [
+              { from: "src/assets/images", to: "images" },
+            ],
+          }),
     ],
     module: {
         rules: [
@@ -59,7 +72,16 @@ module.exports = {
                 use: ["style-loader", "css-loader", "sass-loader"]
             },
             {
-                test: /\.(jpg|jpeg|png|gif|woff|woff2|eot|ttf|svg|gif|mp3)$/i,
+                test: /\.(jpg|jpeg|png|gif|svg|mp3)$/i,
+                use: [{
+                    loader: "file-loader",
+                    options: {
+                        outputPath: 'images',
+                    },
+                }]
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf)$/i,
                 use: ["file-loader"]
             },
             {
@@ -73,7 +95,7 @@ module.exports = {
                 ],
             },
             {
-                test: /\.csv$/,
+                test: /\.(csv|tsv)$/,
                 loader: 'csv-loader',
                 options: {
                   dynamicTyping: true,
