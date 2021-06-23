@@ -30,7 +30,7 @@ const Home = () => {
 
       <Segment style={{ padding: '8em 0em' }} vertical>
         {/* # TODO: check color */}
-        <Header as='h1' style={{ fontSize: 'min(20vw, 300px)', fontFamily: "Billabong", color: blue }} textAlign="center">
+        <Header as='h1' style={{ fontSize: 'min(40vw, 300px)', fontFamily: "Billabong", color: blue }} textAlign="center">
           filters
         </Header>
       </Segment>
@@ -54,13 +54,13 @@ const Home = () => {
               </p>
             </Grid.Column>
             <Grid.Column floated='right' width={8}>
-              <div style={{ minHeight: "min(400px, 60vw)" }}>
+              <div style={{ minHeight: "min(400px, 70vw)" }}>
 
                 <motion.div animate={{ y: 15 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }} initial={{ y: 10 }} >
                   <motion.div whileHover={{ scale: 1.12 }} >
                     <Image
                       src={"../images/iphone_filters/filtro_brillante.png"}
-                      style={{ position: "absolute", bottom: -380, right: "65%", maxHeight: "min(350px, 60vw)", boxShadow: "10px 20px 40px #303030" }}
+                      style={{ position: "absolute", top: "30px", left: "5%", maxHeight: "min(350px, 60vw)", boxShadow: "10px 20px 40px #303030" }}
                     />
                   </motion.div>
                 </motion.div>
@@ -68,7 +68,7 @@ const Home = () => {
                   <motion.div whileHover={{ scale: 1.12 }} >
                     <Image
                       src={"../images/iphone_filters/filtro_abeja.png"}
-                      style={{ position: "absolute", bottom: -370, right: "35%", maxHeight: "min(350px, 60vw)", boxShadow: "10px 20px 40px #303030" }}
+                      style={{ position: "absolute", top: "10px", right: "35%", maxHeight: "min(350px, 60vw)", boxShadow: "10px 20px 40px #303030" }}
                     />
                   </motion.div>
                 </motion.div>
@@ -76,7 +76,7 @@ const Home = () => {
                   <motion.div whileHover={{ scale: 1.12 }} >
                     <Image
                       src={"../images/iphone_filters/filtro_moreno.png"}
-                      style={{ position: "absolute", bottom: -390, right: "5%", maxHeight: "min(350px, 60vw)", boxShadow: "10px 20px 40px #303030" }}
+                      style={{ position: "absolute", top: "50px", right: "5%", maxHeight: "min(350px, 60vw)", boxShadow: "10px 20px 40px #303030" }}
                     />
                   </motion.div>
                 </motion.div>
