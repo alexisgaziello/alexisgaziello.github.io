@@ -96,24 +96,24 @@ const App = () => {
                                     Footer Header
                                 </Header>
                                 <p>
-                                    Extra space for a call to action inside the footer that could help re-engage users.
+                                    Si tienes dudas no dudes en contactarnos!
                                 </p>
                             </Grid.Column>
                             <Grid.Column width={4}>
-                                <Header inverted as='h4' content='About' />
+                                <Header inverted as='h4' content='Contact' />
                                 <List link inverted>
                                     <List.Item>
-                                        <List.Icon name='users' />
-                                        <List.Content>Hola</List.Content>
+                                        <List.Icon name='marker' />
+                                        <List.Content>Everywhere</List.Content>
                                     </List.Item>
                                     <List.Item>
-                                        <List.Icon name='marker' />
-                                        <List.Content>New York, NY</List.Content>
+                                        <List.Icon name='phone' />
+                                        <List.Content>+0 123 456 789 </List.Content>
                                     </List.Item>
                                     <List.Item>
                                         <List.Icon name='mail' />
                                         <List.Content>
-                                            <a href='mailto:danibetancort@hotmail.com'>danibetancort@hotmail.com</a>
+                                            <a href='mailto:alexis.gaziello@gmail.com'>alexis.gaziello@gmail.com</a>
                                         </List.Content>
                                     </List.Item>
                                     <List.Item>
