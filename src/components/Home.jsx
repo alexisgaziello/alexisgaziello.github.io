@@ -21,6 +21,8 @@ import { useHistory } from "react-router-dom";
 
 import { motion } from "framer-motion"
 
+import Sparkles from 'react-sparkle'
+
 
 const Home = () => {
   const history = useHistory();
@@ -29,7 +31,15 @@ const Home = () => {
     <div>
 
       <Segment style={{ padding: '8em 0em' }} vertical>
-        {/* # TODO: check color */}
+        <Sparkles
+          // color="red"
+          minSize={7}
+          maxSize={13}
+          flicker={false}
+          fadeOutSpeed={20}
+          flicker={false}
+          overflowPx={0}
+        />
         <Header as='h1' style={{ fontSize: 'min(40vw, 300px)', fontFamily: "Billabong", color: blue }} textAlign="center">
           filters
         </Header>
