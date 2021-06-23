@@ -45,7 +45,7 @@ const Home = () => {
         </Header>
       </Segment>
 
-      <Segment style={{ padding: '8em 0em', backgroundImage: `url(${"../images/backgrounds/amarillo_bola_rosa.png"})`, backgroundRepeat: "repeat" }} vertical>
+      <Segment style={{ padding: '8em 0em', backgroundImage: `url(${"../images/backgrounds/amarillo_bola_rosa.png"})` }} vertical>
         <Grid container stackable verticalAlign='middle' >
           <Grid.Row>
             <Grid.Column width={8}>
