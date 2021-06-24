@@ -1,8 +1,8 @@
-title,tryLink,initialSliderValue
-¿Añadimos efecto de belleza facial?," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",30
-¿Añadimos anti-ojeras?," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",40
-¿Le damos más rubor a los pómulos?," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",30
-¿Añadimos un iluminador facial?," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",50
-¿Afinamos la nariz?," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",50
-¿Le damos más volumen a los labios?," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",30
-¿Afinamos  la barbilla?," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",20
+title,pregunta,iconName,tryLink,initialSliderValue
+Piel,¿Añadimos efecto de belleza facial?,like," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",30
+Ojeras,¿Añadimos anti-ojeras?,eye," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",40
+Pómulos,¿Le damos más rubor a los pómulos?,like," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",30
+Iluminación,¿Añadimos un iluminador facial?,lightbulb outline," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",50
+Nariz,¿Afinamos la nariz?,like," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",50
+Labios,¿Le damos más volumen a los labios?,like," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",30
+Barbilla,¿Afinamos  la barbilla?,like," https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg""",20

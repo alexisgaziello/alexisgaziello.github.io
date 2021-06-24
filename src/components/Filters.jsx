@@ -14,6 +14,7 @@ import {
 
 import RadioOptions from './filters/RadioOptions.jsx'
 import QuestionSlider from './filters/QuestionSlider.jsx'
+import Steps from './filters/Steps.jsx'
 
 import { blue, pink, yellow } from "../constants.js"
 
@@ -80,33 +81,68 @@ const tamaño = [
   },
 ]
 
+const stepsDescription = questionsConfig.map(questionConfig => {
+  return {
+    title: questionConfig.title,
+    iconName: questionConfig.iconName,
+  }
+});
 
-const Filters = () => {
 
-  return (
-    <div>
+export default class Filters extends React.Component {
+
+  state = {
+    activeStep: 0,
+    completed: stepsDescription.map(() => false),
+  };
+
+  constructor(props) {
+    super(props)
+
+    this.setActiveStep = this.setActiveStep.bind(this)
+  }
+
+  setActiveStep(index) {
+    const { completed } = this.state;
+    if (index > completed.findIndex((isCompleted) => !isCompleted)+1 && !completed[index]){
+      // We don't want skipping steps
+      return
+    }
+    completed[index-1] = true;
+    this.setState({
+      activeStep: index,
+      completed: completed
+    })
+  }
+
+  render() {
+    return (
       <Container>
         <Header as='h1' textAlign="center" style={{ fontSize: '8em', fontFamily: "Windsor", color: pink, padding: "10vh" }}>
           ¡Personaliza tu filtro!
         </Header>
         {/* <RadioOptions
-          title="Tonalidad"
-          fields={tonalidad}
-          tryLink="https://resizer.glanacion.com/resizer/meIoluj_woSjQUOMMYSoYCILPF4=/879x586/smart/filters:quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/DA5Y4GXFABHFPD7VZDPCARIA4U.jpg"
+        title="Tonalidad"
+        fields={tonalidad}
+        tryLink="https://resizer.glanacion.com/resizer/meIoluj_woSjQUOMMYSoYCILPF4=/879x586/smart/filters:quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/DA5Y4GXFABHFPD7VZDPCARIA4U.jpg"
+      />
+
+      <RadioOptions
+        title="Tamaño"
+        fields={tamaño}
+        tryLink="https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg"
+      /> */}
+
+        {/* {loadQuestions()} */}
+        <Button onClick={() => this.setActiveStep(this.state.activeStep+1)} >Next</Button>
+        <Steps
+          stepsDescription={stepsDescription}
+          activeStep={this.state.activeStep}
+          setActiveStep={this.setActiveStep}
+          completed={this.state.completed}
         />
 
-        <RadioOptions
-          title="Tamaño"
-          fields={tamaño}
-          tryLink="https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg"
-        /> */}
-
-        {loadQuestions()}
-
       </Container>
-
-    </div>
-  );
+    )
+  }
 }
-
-export default Filters;

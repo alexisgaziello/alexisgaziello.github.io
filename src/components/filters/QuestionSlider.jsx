@@ -58,7 +58,7 @@ export default class QuestionSlider extends Component {
                 </Grid.Column>
                 <Grid.Column width={4}>
 
-                <Label color="green">{this.state.sliderValue}</Label>
+                <Label color="green">{sliderValue}</Label>
                 </Grid.Column>
 
                 </Grid>
