@@ -28,9 +28,9 @@ import {
 
 
 const languageOptions = [
-    { key: 'English', text: 'English', value: 'English', flag: "uk" },
-    { key: 'Spanish', text: 'Spanish', value: 'Spanish', flag: "es" },
-    { key: 'French', text: 'French', value: 'French', flag: "fr" },
+    { text: 'English', flag: "uk" },
+    { text: 'Español', flag: "es" },
+    { text: 'Français', flag: "fr" },
 ]
 
 const App = () => {
@@ -68,7 +68,7 @@ const App = () => {
                         >
                             <Dropdown.Menu>
                                 {languageOptions.map((option) => (
-                                    <Dropdown.Item key={option.value} {...option} />
+                                    <Dropdown.Item key={option.flag} {...option} />
                                 ))}
                             </Dropdown.Menu>
 
