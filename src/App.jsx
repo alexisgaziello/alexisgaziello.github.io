@@ -91,15 +91,13 @@ const App = () => {
                 <Container>
                     <Grid divided inverted stackable>
                         <Grid.Row>
-                            <Grid.Column width={12}>
+                            <Grid.Column width={12} >
                                 <Header as='h4' inverted>
-                                    Footer Header
+                                ¡Si tienes dudas no dudes en contactarnos!
+
                                 </Header>
-                                <p>
-                                    Si tienes dudas no dudes en contactarnos!
-                                </p>
                             </Grid.Column>
-                            <Grid.Column width={4}>
+                            <Grid.Column width={4} >
                                 <Header inverted as='h4' content='Contact' />
                                 <List link inverted>
                                     <List.Item>

@@ -3,6 +3,7 @@ import Papa from 'papaparse';
 
 import {
   Container,
+  Header,
   Segment,
   Form,
   Radio,
@@ -14,19 +15,19 @@ import {
 import RadioOptions from './filters/RadioOptions.jsx'
 import QuestionSlider from './filters/QuestionSlider.jsx'
 
-
+import { blue, pink, yellow } from "../constants.js"
 
 import questionsConfig from '../data/questions.csv'
 
 function loadQuestions() {
   const questionsComponents = []
-  questionsConfig.forEach( questionConfig => questionsComponents.push(
+  questionsConfig.forEach(questionConfig => questionsComponents.push(
     <QuestionSlider key={questionConfig.title}
       title={questionConfig.title}
       tryLink={questionConfig.tryLink}
       initialSliderValue={questionConfig.initialSliderValue}
     />
-    )
+  )
   )
   return questionsComponents
 }
@@ -85,9 +86,10 @@ const Filters = () => {
   return (
     <div>
       <Container>
-        <h1>Filters</h1>
-
-        <RadioOptions
+        <Header as='h1' textAlign="center" style={{ fontSize: '8em', fontFamily: "Windsor", color: pink, padding: "10vh" }}>
+          ¡Personaliza tu filtro!
+        </Header>
+        {/* <RadioOptions
           title="Tonalidad"
           fields={tonalidad}
           tryLink="https://resizer.glanacion.com/resizer/meIoluj_woSjQUOMMYSoYCILPF4=/879x586/smart/filters:quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/DA5Y4GXFABHFPD7VZDPCARIA4U.jpg"
@@ -97,17 +99,9 @@ const Filters = () => {
           title="Tamaño"
           fields={tamaño}
           tryLink="https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg"
-        />
+        /> */}
 
         {loadQuestions()}
-
-        <br />
-
-        <Grid>
-          <Grid.Column textAlign="center">
-            <Button>Check out!</Button>
-          </Grid.Column>
-        </Grid>
 
       </Container>
 

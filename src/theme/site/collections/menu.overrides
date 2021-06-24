@@ -1,3 +1,14 @@
 /*******************************
          Site Overrides
 *******************************/
+
+.ui.menu {
+    font-family: "Windsor";
+    font-size: 2.5rem;
+    min-height: 1.8em;
+}
+
+.ui.menu .item  {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
