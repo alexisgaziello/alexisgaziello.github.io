@@ -81,12 +81,20 @@ const tamaño = [
   },
 ]
 
+
+// Steps
 const stepsDescription = questionsConfig.map(questionConfig => {
   return {
     title: questionConfig.title,
     iconName: questionConfig.iconName,
   }
 });
+
+// Add payment step
+stepsDescription.push({
+  title: "Pago",
+  iconName: "payment",
+})
 
 
 export default class Filters extends React.Component {

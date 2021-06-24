@@ -23,7 +23,7 @@ export default class Steps extends Component {
         const max = colors.length;
         const randomInt = Math.floor(Math.random() * max)
         const color = colors[randomInt]
-
+        
         const steps = stepsDescription.map((stepDescription, index) => {
             const { title, iconName } = stepDescription
 
