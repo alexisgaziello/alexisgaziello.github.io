@@ -2,4 +2,7 @@
      User Global Variables
 *******************************/
 
+@stepActiveColor         : #99c5e6;
+
 @positiveColor           : #c3f7c9;
+@primaryColor            : #a7d2f2;
