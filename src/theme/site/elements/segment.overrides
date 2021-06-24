@@ -2,7 +2,7 @@
          Site Overrides
 *******************************/
 
-.ui.segment {
-    background-repeat: no-repeat !important;
-    background-size: 100% !important;
-}
+// .ui.segment {
+//     background-repeat: no-repeat !important;
+//     background-size: 100% !important;
+// }
