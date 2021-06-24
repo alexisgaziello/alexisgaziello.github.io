@@ -48,19 +48,60 @@ const Home = () => {
       <Segment style={{ padding: '8em 0em', backgroundImage: `url(${"../images/backgrounds/amarillo_bola_rosa.png"})` }} vertical>
         <Grid container stackable verticalAlign='middle' >
           <Grid.Row>
+          <Grid.Column floated='right' width={8}>
+              <div style={{ minHeight: "min(400px, 70vw)" }}>
+
+                <motion.div animate={{ y: 15 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }} initial={{ y: 10 }} >
+                  <motion.div whileHover={{ scale: 1.12 }} >
+                    <Image
+                      src={"../images/placeholder.png"}
+                      style={{ position: "absolute", top: "30px", left: "5%", maxHeight: "min(350px, 60vw)", boxShadow: "10px 20px 40px #303030" }}
+                    />
+                  </motion.div>
+                </motion.div>
+              </div>
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <Header as='h3' style={{ fontSize: '5em', fontFamily: "Windsor" }}>
+                Libertad y personalización
+              </Header>
+              <p style={{ fontSize: '1.33em' }}>
+                ¿Te imaginas poder diseñar un filtro con las características de tu elección?
+                Nosotros queremos darte esa habilidad. Con unos sencillos pasos podrás construir un filtro 
+                desde 0 y añadirlo a tu cuenta para que tus seguidores puedan utilizarlo.
+              </p>
+            </Grid.Column>
+          </Grid.Row>
+
+          <Grid.Row>
+
+            <br />
+            <br />
+            <br />
+
+          </Grid.Row>
+
+          <Grid.Row>
+            <Grid.Column textAlign='center'>
+              <Button size='huge' onClick={() => { history.push("/filters") }} style={{ backgroundColor: pink }} >
+                Personaliza tu filtro!
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Segment>
+
+      <Segment style={{ padding: '8em 0em', backgroundImage: `url(${"../images/backgrounds/azul_triangulo_blanco.png"})` }} vertical>
+        <Grid container stackable verticalAlign='middle' >
+          <Grid.Row>
             <Grid.Column width={8}>
               <Header as='h3' style={{ fontSize: '5em', fontFamily: "Windsor" }}>
                 Te ayudamos a crecer
               </Header>
               <p style={{ fontSize: '1.33em' }}>
-                Añade un filtro personalizado a tu Instagram que hará tu cuenta única. Consigue un mayor alcance
-                y deja a tus seguidores boquiabiertos con un filtro que nunca han visto.
-              </p>
-              <Header as='h3' style={{ fontSize: '5em', fontFamily: "Windsor" }}>
-                Libertad y personalización
-              </Header>
-              <p style={{ fontSize: '1.33em' }}>
-                Algo más de texto que no se que poner ahora.
+                Añade un filtro personalizado a tu Instagram que hará tu cuenta exclusiva. Consigue un mayor alcance
+                y deja a tus seguidores boquiabiertos con un filtro que nunca han visto. 
+                Diseña y comparte un efecto único en tus historias.
               </p>
             </Grid.Column>
             <Grid.Column floated='right' width={8}>
@@ -92,22 +133,6 @@ const Home = () => {
                 </motion.div>
               </div>
 
-            </Grid.Column>
-          </Grid.Row>
-
-          <Grid.Row>
-
-          <br />
-          <br />
-          <br />
-
-          </Grid.Row>
-
-          <Grid.Row>
-            <Grid.Column textAlign='center'>
-              <Button size='huge' onClick={() => { history.push("/filters") }} style={{ backgroundColor: pink}} >
-                Personaliza tu filtro!
-              </Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
