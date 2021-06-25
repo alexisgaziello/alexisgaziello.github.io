@@ -9,3 +9,8 @@
          url('../fonts/Billabong/Billabong.eot'), /* IE9 Compat Modes */
          url('../fonts/Billabong/Billabong.ttf')  format('truetype'); /* Safari, Android, iOS */
 }
+
+.custom-shadow {
+    -webkit-filter: drop-shadow(-40px 130px 25px #303030);
+    filter:         drop-shadow(-40px 130px 25px #303030); 
+}

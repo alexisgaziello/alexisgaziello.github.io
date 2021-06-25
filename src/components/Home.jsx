@@ -40,25 +40,33 @@ const Home = () => {
           flicker={false}
           overflowPx={0}
         />
+        <Image
+          src={"../images/rainbow.png"}
+          style={{ position: "absolute", bottom: 0, left: 0, maxWidth: "min(200px, 25vw)" }}
+        />
+        <Image
+          src={"../images/sun.png"}
+          style={{ position: "absolute", top: 20, right: 40, maxWidth: "min(200px, 25vw)" }}
+        />
         <Header as='h1' style={{ fontSize: 'min(40vw, 300px)', fontFamily: "Billabong", color: blue }} textAlign="center">
           filters
         </Header>
       </Segment>
 
-      <Segment style={{ padding: '8em 0em', backgroundImage: `url(${"../images/backgrounds/amarillo_bola_rosa.png"})` }} vertical>
+      <Segment style={{ padding: '8em 0em', backgroundImage: `url(${"../images/backgrounds/pink_curved_lines.png"})` }} vertical>
         <Grid container stackable verticalAlign='middle' >
           <Grid.Row>
-          <Grid.Column floated='right' width={8}>
+            <Grid.Column floated='right' width={8}>
               <div style={{ minHeight: "min(400px, 70vw)" }}>
 
                 <motion.div animate={{ y: 15 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }} initial={{ y: 10 }} >
-                  <motion.div whileHover={{ scale: 1.12 }} >
-                    <Image
-                      src={"../images/placeholder.png"}
-                      style={{ position: "absolute", top: "30px", left: "5%", maxHeight: "min(350px, 60vw)", boxShadow: "10px 20px 40px #303030" }}
-                    />
-                  </motion.div>
+                  <Image
+                    src={"../images/instagram_like_blue.png"}
+                    style={{ position: "absolute", top: "30px", left: "20%", maxHeight: "min(350px, 60vw)" }}
+                    className="custom-shadow"
+                  />
                 </motion.div>
+
               </div>
             </Grid.Column>
             <Grid.Column width={8}>
@@ -67,7 +75,7 @@ const Home = () => {
               </Header>
               <p style={{ fontSize: '1.33em' }}>
                 ¿Te imaginas poder diseñar un filtro con las características de tu elección?
-                Nosotros queremos darte esa habilidad. Con unos sencillos pasos podrás construir un filtro 
+                Nosotros queremos darte esa habilidad. Con unos sencillos pasos podrás construir un filtro
                 desde 0 y añadirlo a tu cuenta para que tus seguidores puedan utilizarlo.
               </p>
             </Grid.Column>
@@ -100,7 +108,7 @@ const Home = () => {
               </Header>
               <p style={{ fontSize: '1.33em' }}>
                 Añade un filtro personalizado a tu Instagram que hará tu cuenta exclusiva. Consigue un mayor alcance
-                y deja a tus seguidores boquiabiertos con un filtro que nunca han visto. 
+                y deja a tus seguidores boquiabiertos con un filtro que nunca han visto.
                 Diseña y comparte un efecto único en tus historias.
               </p>
             </Grid.Column>
