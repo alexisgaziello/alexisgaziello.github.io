@@ -46,6 +46,7 @@
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2",
+    "webpack-directory-scan": "^1.2.0",
     "webpack-manifest-plugin": "^3.1.1",
     "webpack-nano": "^1.1.1",
     "webpack-subresource-integrity": "^1.5.2"

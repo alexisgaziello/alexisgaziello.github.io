@@ -26,6 +26,8 @@ module.exports = {
                 __dirname,
                 '/src/theme/theme.config',
             ),
+            images: path.resolve(__dirname, 'src/assets/images/'),
+            fonts: path.resolve(__dirname, 'src/assets/fonts/'),
         },
         modules: [path.resolve(__dirname, "src"), "node_modules"],
     },

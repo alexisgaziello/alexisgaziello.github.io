@@ -53,7 +53,7 @@ const Home = () => {
         </Header>
       </Segment>
 
-      <Segment style={{ padding: '8em 0em', backgroundImage: `url(${"../images/backgrounds/pink_curved_lines.png"})` }} vertical>
+      <Segment style={{ padding: '8em 0em', backgroundImage: `url(${"images/backgrounds/pink_curved_lines.png"})` }} vertical>
         <Grid container stackable verticalAlign='middle' >
           <Grid.Row>
             <Grid.Column floated='right' width={8}>
@@ -73,7 +73,7 @@ const Home = () => {
               <Header as='h3' style={{ fontSize: '5em', fontFamily: "Windsor" }}>
                 Libertad y personalización
               </Header>
-              <p style={{ fontSize: '1.33em' }}>
+              <p style={{ fontSize: '1.33em', fontFamily:"sailorsregular" }}>
                 ¿Te imaginas poder diseñar un filtro con las características de tu elección?
                 Nosotros queremos darte esa habilidad. Con unos sencillos pasos podrás construir un filtro
                 desde 0 y añadirlo a tu cuenta para que tus seguidores puedan utilizarlo.
@@ -106,7 +106,7 @@ const Home = () => {
               <Header as='h3' style={{ fontSize: '5em', fontFamily: "Windsor" }}>
                 Te ayudamos a crecer
               </Header>
-              <p style={{ fontSize: '1.33em' }}>
+              <p style={{ fontSize: '1.33em', fontFamily:"sailorsregular" }}>
                 Añade un filtro personalizado a tu Instagram que hará tu cuenta exclusiva. Consigue un mayor alcance
                 y deja a tus seguidores boquiabiertos con un filtro que nunca han visto.
                 Diseña y comparte un efecto único en tus historias.
