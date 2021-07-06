@@ -77,10 +77,10 @@ const Home = () => {
               </div>
             </Grid.Column>
             <Grid.Column width={8} className="mobile only">
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
             </Grid.Column>
             <Grid.Column width={8}>
               <Header as='h3' style={{ fontSize: '5em', fontFamily: "Windsor" }}>
