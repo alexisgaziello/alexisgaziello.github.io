@@ -69,12 +69,18 @@ const Home = () => {
                 <motion.div animate={{ y: 15 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }} initial={{ y: 10 }} >
                   <Image
                     src={"../images/instagram_like_blue.png"}
-                    style={{ position: "absolute", top: "0", left: "20%", maxHeight: "min(350px, 60vw)" }}
+                    style={{ position: "absolute", top: "20px", left: "20%", maxHeight: "min(350px, 60vw)" }}
                     className="custom-shadow"
                   />
                 </motion.div>
 
               </div>
+            </Grid.Column>
+            <Grid.Column width={8} className="mobile only">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             </Grid.Column>
             <Grid.Column width={8}>
               <Header as='h3' style={{ fontSize: '5em', fontFamily: "Windsor" }}>
