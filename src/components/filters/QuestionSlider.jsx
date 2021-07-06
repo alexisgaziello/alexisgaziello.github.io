@@ -10,7 +10,7 @@ import {
 } from 'semantic-ui-react';
 import { Slider } from "react-semantic-ui-range";
 
-import { blue, pink, yellow } from "../../constants.js"
+import { blue, pink, yellow, green } from "../../constants.js"
 const colors = [blue, pink, yellow];
 
 export default class QuestionSlider extends Component {
@@ -19,7 +19,7 @@ export default class QuestionSlider extends Component {
         no_active: false,
         sliderValue: this.props.initialSliderValue,
     };
-    
+
     handleClickYes = () =>
         this.setState(() => ({
             yes_active: true,
@@ -38,28 +38,27 @@ export default class QuestionSlider extends Component {
         const max = colors.length;
         const randomInt = Math.floor(Math.random() * max)
         const color = colors[randomInt]
-        console.log(color)
         const slider = (
             <Grid.Column width={12}>
                 <Grid columns={2}>
-                <Grid.Column width={12}>
-                <Slider color={color} inverted={false}
-                    settings={{
-                        start: sliderValue,
-                        min: 0,
-                        max: 100,
-                        step: 1,
-                        onChange: (value) => {
-                            this.setState({
-                                sliderValue: value
-                            })
-                        }
-                    }} />
-                </Grid.Column>
-                <Grid.Column width={4}>
+                    <Grid.Column width={12}>
+                        <Slider color={color} inverted={false}
+                            settings={{
+                                start: sliderValue,
+                                min: 0,
+                                max: 100,
+                                step: 1,
+                                onChange: (value) => {
+                                    this.setState({
+                                        sliderValue: value
+                                    })
+                                }
+                            }} />
+                    </Grid.Column>
+                    <Grid.Column width={4}>
 
-                <Label color="green">{sliderValue}</Label>
-                </Grid.Column>
+                        <Label color="green">{sliderValue}</Label>
+                    </Grid.Column>
 
                 </Grid>
 
@@ -68,8 +67,13 @@ export default class QuestionSlider extends Component {
         )
 
         return (
-            <Segment>
-                <h1 style={{color: color}}>{this.props.title}</h1>
+            <div hidden={this.props.hidden}>
+                <h1 style={{ color: color }}>{this.props.questionConfig.title}</h1>
+                <Image
+                    src={`../images/monsters/monster_${this.props.index}.png`}
+                    style={{ position: "relative", bottom: 0, left: "10%", maxWidth: "min(400px, 35vw, 50vh)" }}
+                />
+                <div className='speech-bubble'>{this.props.questionConfig.question}</div>
                 <Grid stackable columns={2}>
                     <Grid.Column width={4}>
                         <Button content='Sí' toggle active={yes_active} onClick={this.handleClickYes} />
@@ -81,11 +85,11 @@ export default class QuestionSlider extends Component {
 
                 </Grid>
                 <br />
-                <Button animated='fade' onClick={() => window.open(this.props.tryLink, '_blank')}>
+                <Button animated='fade' onClick={() => window.open(this.props.questionConfig.tryLink, '_blank')}>
                     <Button.Content visible>Pruébalo!</Button.Content>
                     <Button.Content hidden><Icon name="instagram" /></Button.Content>
                 </Button>
-            </Segment>
+            </div>
         )
     }
 }

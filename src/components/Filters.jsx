@@ -112,11 +112,11 @@ export default class Filters extends React.Component {
 
   setActiveStep(index) {
     const { completed } = this.state;
-    if (index > completed.findIndex((isCompleted) => !isCompleted)+1 && !completed[index]){
+    if (index > completed.findIndex((isCompleted) => !isCompleted) + 1 && !completed[index]) {
       // We don't want skipping steps
       return
     }
-    completed[index-1] = true;
+    completed[index - 1] = true;
     this.setState({
       activeStep: index,
       completed: completed
@@ -141,8 +141,15 @@ export default class Filters extends React.Component {
         tryLink="https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg"
       /> */}
 
-        {/* {loadQuestions()} */}
-        <Button onClick={() => this.setActiveStep(this.state.activeStep+1)} >Next</Button>
+        {questionsConfig.map((questionConfig, index) => (
+          <QuestionSlider key={index}
+            index={index}
+            initialSliderValue={questionConfig.initialSliderValue}
+            hidden={index != this.state.activeStep}
+            questionConfig={questionConfig}
+            />
+        ))}
+        <Button onClick={() => this.setActiveStep(this.state.activeStep + 1)} >Next</Button>
         <Steps
           stepsDescription={stepsDescription}
           activeStep={this.state.activeStep}
