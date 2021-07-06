@@ -12,6 +12,8 @@ import {
   Grid,
 } from 'semantic-ui-react';
 
+import { motion } from "framer-motion"
+
 import RadioOptions from './filters/RadioOptions.jsx'
 import QuestionSlider from './filters/QuestionSlider.jsx'
 import Steps from './filters/Steps.jsx'
@@ -100,6 +102,7 @@ stepsDescription.push({
 export default class Filters extends React.Component {
 
   state = {
+    started: true,
     activeStep: 0,
     completed: stepsDescription.map(() => false),
   };
@@ -124,38 +127,55 @@ export default class Filters extends React.Component {
   }
 
   render() {
+    const formAnimation = {
+      show: { opacity: 1, y: 0 },
+      hidden: { opacity: 0, y: "-100%", transition: { when: "beforeChildren" } },
+    }
+
     return (
       <Container>
-        <Header as='h1' textAlign="center" style={{ fontSize: '8em', fontFamily: "Windsor", color: pink, padding: "10vh" }}>
-          ¡Personaliza tu filtro!
-        </Header>
-        {/* <RadioOptions
-        title="Tonalidad"
-        fields={tonalidad}
-        tryLink="https://resizer.glanacion.com/resizer/meIoluj_woSjQUOMMYSoYCILPF4=/879x586/smart/filters:quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/DA5Y4GXFABHFPD7VZDPCARIA4U.jpg"
-      />
 
-      <RadioOptions
-        title="Tamaño"
-        fields={tamaño}
-        tryLink="https://www.ecestaticos.com/imagestatic/clipping/c47/eac/c47eac612aa7ccb688bcb243bda93e25.jpg"
-      /> */}
+        {/* Initial screen */}
+        <div hidden={this.state.started}>
+          <Header as='h1' textAlign="center" style={{ fontSize: '8em', fontFamily: "Windsor", color: pink, padding: "10vh" }}>
+            ¡Personaliza tu filtro!
+          </Header>
+          <Header as='h3' textAlign="center" style={{ fontSize: '2em', fontFamily: "Windsor", color: blue, padding: "10vh" }}>
+            ¡A continuación nuestros amigos te vamos a hacer una serie de preguntas que nos van a ayudar a hacer tu filtro perfecto!
+          </Header>
+          <Grid>
+            <Grid.Column textAlign="center">
+              <Button onClick={() => this.setState({ started: true, activeStep: 0 })} > Empezar! </Button>
+            </Grid.Column>
+          </Grid>
 
-        {questionsConfig.map((questionConfig, index) => (
-          <QuestionSlider key={index}
-            index={index}
-            initialSliderValue={questionConfig.initialSliderValue}
-            hidden={index != this.state.activeStep}
-            questionConfig={questionConfig}
+        </div>
+
+        {/* Form */}
+        <motion.div
+          hidden={!this.state.started}
+          variants={formAnimation}
+          initial="hidden"
+          animate={this.state.started ? "show" : "hidden"}
+        >
+
+          {questionsConfig.map((questionConfig, index) => (
+            <QuestionSlider key={index}
+              index={index}
+              initialSliderValue={questionConfig.initialSliderValue}
+              hidden={index != this.state.activeStep}
+              questionConfig={questionConfig}
             />
-        ))}
-        <Button onClick={() => this.setActiveStep(this.state.activeStep + 1)} >Next</Button>
-        <Steps
-          stepsDescription={stepsDescription}
-          activeStep={this.state.activeStep}
-          setActiveStep={this.setActiveStep}
-          completed={this.state.completed}
-        />
+          ))}
+          <Button onClick={() => this.setActiveStep(this.state.activeStep + 1)} >Next</Button>
+          <Steps
+            stepsDescription={stepsDescription}
+            activeStep={this.state.activeStep}
+            setActiveStep={this.setActiveStep}
+            completed={this.state.completed}
+          />
+        </motion.div>
+
 
       </Container>
     )

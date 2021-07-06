@@ -15,6 +15,9 @@ import {
   Visibility,
 } from 'semantic-ui-react'
 
+import { blue } from "../constants.js"
+
+
 import { useHistory } from "react-router-dom";
 
 const NotFoundPage = () => {
@@ -25,7 +28,7 @@ const NotFoundPage = () => {
     <Container>
       <Segment style={{ padding: '8em 0em' }} vertical>
         {/* TODO: change color to global variable */}
-        <Header as='h1' style={{ fontSize: 'min(15vw, 200px)', fontFamily: "Billabong", color: "#85e2ff" }} textAlign="center">
+        <Header as='h1' style={{ fontSize: 'min(15vw, 200px)', fontFamily: "Billabong", color: blue }} textAlign="center">
           page not found
         </Header>
         <br />
