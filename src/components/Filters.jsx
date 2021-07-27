@@ -167,14 +167,14 @@ export default class Filters extends React.Component {
               questionConfig={questionConfig}
             />
           ))}
-          <Button onClick={() => this.setActiveStep(this.state.activeStep + 1)} >Next</Button>
-          <Steps
+        </motion.div>
+        <Button onClick={() => this.setActiveStep(this.state.activeStep + 1)} >Next</Button>
+        <Steps
             stepsDescription={stepsDescription}
             activeStep={this.state.activeStep}
             setActiveStep={this.setActiveStep}
             completed={this.state.completed}
           />
-        </motion.div>
 
 
       </Container>
