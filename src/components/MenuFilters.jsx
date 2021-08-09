@@ -21,6 +21,7 @@ import RadioOptions from './filters/RadioOptions.jsx'
 import QuestionSlider from './filters/QuestionSlider.jsx'
 import Steps from './filters/Steps.jsx'
 import PaymentForm from './filters/PaymentForm.jsx'
+import UploadOptions from './filters/UploadOptions.jsx'
 
 import { blue, pink, yellow } from "../constants.js"
 
@@ -58,12 +59,6 @@ export default class MenuFilters extends React.Component {
     activeStep: 0,
     // Array to save steps that have been completed.
     completed: stepsDescription.map(() => false),
-    // The filename to upload 
-    file: {
-      fileName: null,
-      fileData: null,
-      fileContentType: null,
-    },
     // Boolean to indicate if the payement and file upload succeeded
     success: null,
   };
@@ -72,73 +67,37 @@ export default class MenuFilters extends React.Component {
     super(props)
     this.setActiveStep = this.setActiveStep.bind(this)
     this.pushActiveStep = this.pushActiveStep.bind(this)
-    this.fileSelected = this.fileSelected.bind(this)
     this.handleSubmission = this.handleSubmission.bind(this)
     this.uploadFile = this.uploadFile.bind(this)
   }
 
-  fileSelected(event) {
-    const selectedFiles = event.target.files;
-    //Check File is not Empty
-    if (selectedFiles.length == 0) {
-      return;
-    }
-    // Select the very first file from list
-    const fileToLoad = selectedFiles[0];
-    const fileName = fileToLoad.name;
-
-    const fileType = fileName.split(".").pop().toLowerCase();
-    let fileContentType = "";
-    if (fileType === "pdf") {
-      fileContentType = "application/pdf"
-    } else if (fileType === "png") {
-      fileContentType = "image/png"
-    } else if (fileType === "jpg" || fileType === "jpeg") {
-      fileContentType = "image/png";
-    }
-
-    let fileData;
-    // FileReader function for read the file.
-    let fileReader = new FileReader();
-    // Onload of file read the file content
-    fileReader.onload = function (event) {
-      fileData = event.target.result;
-    };
-    // Convert data to base64
-    fileReader.readAsDataURL(fileToLoad);
-
-
-    // Save file
-    this.pushActiveStep({
-      file: {
-        fileName: fileName,
-        fileData: fileData,
-        fileContentType: fileContentType,
-      }
-    });
-  }
-
   handleSubmission() {
     this.pushActiveStep();
-    this.uploadFile();
+    console.log(this.state)
+    this.uploadFile("file1");
   }
 
-  async uploadFile() {
+  async uploadFile(fileID) {
+
+    const file = this.state[fileID];
 
     try {
       const customerID = "test";
       const timestamp = Date.now();
-
+      const extension = file.fileContentType.split("/").pop()
       // TODO ENABLE CORS??
+      
+      const url = `https://pa5xypqpp8.execute-api.us-east-1.amazonaws.com/prod/filters-menus/${customerID}_${timestamp}.${extension}`;
 
-      const url = `https://pa5xypqpp8.execute-api.us-east-1.amazonaws.com/prod/filters-menus/${customerID}_${timestamp}.pdf`;
+      console.log("BRO")
+      console.log(this.state)
 
       let response = await fetch(url,
         {
           method: "PUT",
-          body: JSON.stringify(this.state.file.fileData),
+          body: file.fileData,
           headers: {
-            "Content-Type": this.state.file.contentType,
+            "Content-Type": file.fileContentType,
           },
         });
 
@@ -182,8 +141,6 @@ export default class MenuFilters extends React.Component {
       hidden: { opacity: 0, y: "-100%", transition: { when: "beforeChildren" } },
     }
 
-    let hiddenInput;
-
     return (
       <Container>
 
@@ -192,36 +149,7 @@ export default class MenuFilters extends React.Component {
 
         {/* Step 1: Upload file */}
         {this.state.activeStep === 0 &&
-          <Card centered>
-            {/* TODO: image preview when upload */}
-            <Button
-              icon="upload"
-              size="massive"
-              style={{ height: "200px" }}
-              onClick={() => hiddenInput.click()}
-            />
-            <input
-              hidden
-              type="file"
-              name="file"
-              onChange={this.fileSelected}
-              ref={element => {
-                hiddenInput = element
-              }}
-              accept=".jpg,.jpeg,.png,.pdf"
-            />
-
-            {/* Card Description */}
-            <Card.Content>
-              <Card.Header>Upload Image</Card.Header>
-              <Card.Meta>
-                <span className='date'>.jpg, .png, .pdf</span>
-              </Card.Meta>
-              <Card.Description>
-                Select the file that will appear in your filter.
-              </Card.Description>
-            </Card.Content>
-          </Card>
+        <UploadOptions pushActiveStep={this.pushActiveStep}/>
         }
 
         {/* Step 2: Payment */}
