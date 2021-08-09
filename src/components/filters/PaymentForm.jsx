@@ -4,9 +4,10 @@ import {
   Checkbox,
   Form,
   Input,
-  Radio,
+  Grid,
   Select,
   TextArea,
+  Header,
 } from 'semantic-ui-react'
 
 const options = [
@@ -15,7 +16,7 @@ const options = [
   { key: 'o', text: 'Other', value: 'other' },
 ]
 
-class PaymentForm extends Component {
+export default class PaymentForm extends Component {
   state = {}
 
   handleChange = (e, { value }) => this.setState({ value })
@@ -23,7 +24,9 @@ class PaymentForm extends Component {
   render() {
     const { value } = this.state
     return (
+      <div>
       <Form>
+        <Header size="large" >Payment Form</Header>
         <Form.Group widths='equal'>
           <Form.Field
             control={Input}
@@ -36,11 +39,11 @@ class PaymentForm extends Component {
             placeholder='Last name'
           />
         </Form.Group>
-        <Form.Group inline>
+        <Form.Group widths='equal'>
           <Form.Field
             control={Input}
-            label='email'
-            placeholder='your_email@filters.com'
+            label='Email'
+            placeholder='your.email@mail.com'
           />
         </Form.Group>
         <Form.Field
@@ -52,10 +55,11 @@ class PaymentForm extends Component {
           control={Checkbox}
           label='I agree to the Terms and Conditions'
         />
-        <Form.Field control={Button}>Submit</Form.Field>
       </Form>
+
+      <br />
+
+      </div>
     )
   }
 }
-
-export default PaymentForm
