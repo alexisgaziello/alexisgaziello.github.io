@@ -89,9 +89,6 @@ export default class MenuFilters extends React.Component {
       
       const url = `https://pa5xypqpp8.execute-api.us-east-1.amazonaws.com/prod/filters-menus/${customerID}_${timestamp}.${extension}`;
 
-      console.log("BRO")
-      console.log(this.state)
-
       let response = await fetch(url,
         {
           method: "PUT",

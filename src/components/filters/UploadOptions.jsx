@@ -13,13 +13,12 @@ import {
 } from 'semantic-ui-react'
 
 
-export default class UploadOptions extends Component {
+class UploadCard extends Component {
 
     constructor(props) {
         super(props)
         this.fileSelected = this.fileSelected.bind(this)
     }
-
 
     async fileSelected(event, file_id) {
         const selectedFiles = event.target.files;
@@ -56,14 +55,13 @@ export default class UploadOptions extends Component {
             fileData: fileData,
             fileContentType: fileContentType,
         }
-        console.log(file)
+
         this.props.pushActiveStep({
             [`file${file_id}`]: file
         });
     }
 
     render() {
-
         let hiddenInput;
 
         return (
@@ -79,7 +77,7 @@ export default class UploadOptions extends Component {
                     hidden
                     type="file"
                     name="file"
-                    onChange={(event) => this.fileSelected(event, 1)}
+                    onChange={(event) => this.fileSelected(event, this.props.cardID)}
                     ref={element => {
                         hiddenInput = element
                     }}
@@ -88,7 +86,7 @@ export default class UploadOptions extends Component {
 
                 {/* Card Description */}
                 <Card.Content>
-                    <Card.Header>Upload Image</Card.Header>
+                    <Card.Header>Upload File</Card.Header>
                     <Card.Meta>
                         <span className='date'>.jpg, .png, .pdf</span>
                     </Card.Meta>
@@ -97,6 +95,52 @@ export default class UploadOptions extends Component {
                     </Card.Description>
                 </Card.Content>
             </Card>
+        )
+    }
+}
+
+export default class UploadOptions extends Component {
+
+    state = {
+        uploads: 1,
+    }
+
+    render() {
+        return (
+            <div>
+                
+                <Grid columns={1} textAlign="center">
+
+                <Button.Group>
+                    <Button positive={this.state.uploads === 1} onClick={() => this.setState({uploads: 1})}>1 Filter</Button>
+                    <Button.Or />
+                    <Button positive={this.state.uploads === 2} onClick={() => this.setState({uploads: 2})}>2 Filters</Button>
+                </Button.Group>
+                </Grid>
+
+                <Grid stackable columns={this.state.uploads || 1 /* Number of uploads with a min of 1 (0 is error) */}>
+                    {this.state.uploads > 0 &&
+
+                        <Grid.Column>
+                            <UploadCard
+                                pushActiveStep={this.props.pushActiveStep}
+                                cardID={1}
+                            />
+                        </Grid.Column>
+                    }
+                    {this.state.uploads === 2 &&
+                        <Grid.Column>
+                            <UploadCard
+                                pushActiveStep={this.props.pushActiveStep}
+                                cardID={2}
+                            />
+                        </Grid.Column>
+                    }
+                </Grid>
+
+
+            </div>
+
         )
     }
 

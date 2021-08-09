@@ -116,7 +116,7 @@ const App = () => {
                                     <List.Item>
                                         <List.Icon name='mail' />
                                         <List.Content>
-                                            <a href='mailto:insta.filters.contact@gmail.com'>alexis.gaziello@gmail.com</a>
+                                            <a href='mailto:insta.filters.contact@gmail.com'>insta.filters.contact@gmail.com</a>
                                         </List.Content>
                                     </List.Item>
                                     <List.Item>
