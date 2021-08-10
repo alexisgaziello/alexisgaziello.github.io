@@ -10,10 +10,15 @@ import {
     TextArea,
     Header,
     Card,
+    Image,
 } from 'semantic-ui-react'
 
 
 class UploadCard extends Component {
+
+    state = {
+        fileName: null
+    }
 
     constructor(props) {
         super(props)
@@ -42,12 +47,12 @@ class UploadCard extends Component {
             })
         }
 
-        let fileEncoded = await fileLoader();
+        const fileEncoded = await fileLoader();
 
-        fileEncoded = fileEncoded.split(";")
+        const fileEncodedSplitted = fileEncoded.split(";")
 
-        const fileData = fileEncoded[1].split(",").pop()
-        const fileContentType = fileEncoded[0].split(":").pop()
+        const fileData = fileEncodedSplitted[1].split(",").pop()
+        const fileContentType = fileEncodedSplitted[0].split(":").pop()
 
         // Save file
         const file = {
@@ -55,6 +60,10 @@ class UploadCard extends Component {
             fileData: fileData,
             fileContentType: fileContentType,
         }
+
+        this.setState({
+            fileName: fileName
+        })
 
         this.props.parentSetState({
             [`file${file_id}`]: file
@@ -68,11 +77,13 @@ class UploadCard extends Component {
             <Card centered>
                 {/* TODO: image preview when upload */}
                 <Button
-                    icon="upload"
+                    icon={this.state.fileName ? "check" : "upload"}
+                    positive={ this.state.fileName }
                     size="massive"
                     style={{ height: "200px" }}
                     onClick={() => hiddenInput.click()}
                 />
+
                 <input
                     hidden
                     type="file"
@@ -86,12 +97,13 @@ class UploadCard extends Component {
 
                 {/* Card Description */}
                 <Card.Content>
-                    <Card.Header>Upload File</Card.Header>
+                    <Card.Header>{this.state.fileName ? this.state.fileName : "Upload File"}</Card.Header>
                     <Card.Meta>
-                        <span className='date'>.jpg, .png, .pdf</span>
+                        <span className='date'>{this.state.fileName ? "" : ".jpg, .png, .pdf"}</span>
                     </Card.Meta>
                     <Card.Description>
-                        Select the file that will appear in your filter.
+                    {this.state.fileName ? "Click again to select a different file" : "Select the file that will appear in your filter."}
+                        
                     </Card.Description>
                 </Card.Content>
             </Card>
@@ -104,14 +116,14 @@ export default class UploadOptions extends Component {
     render() {
         return (
             <div>
-                
+
                 <Grid columns={1} textAlign="center">
 
-                <Button.Group>
-                    <Button positive={this.props.filtersQty === 1} onClick={() => this.props.parentSetState({filtersQty: 1})}>1 Filter</Button>
-                    <Button.Or />
-                    <Button positive={this.props.filtersQty === 2} onClick={() => this.props.parentSetState({filtersQty: 2})}>2 Filters</Button>
-                </Button.Group>
+                    <Button.Group>
+                        <Button positive={this.props.filtersQty === 1} onClick={() => this.props.parentSetState({ filtersQty: 1 })}>1 Filter</Button>
+                        <Button.Or />
+                        <Button positive={this.props.filtersQty === 2} onClick={() => this.props.parentSetState({ filtersQty: 2 })}>2 Filters</Button>
+                    </Button.Group>
                 </Grid>
 
                 <Grid stackable columns={this.props.filtersQty || 1 /* Number of filtersQty with a min of 1 (0 is error) */}>
