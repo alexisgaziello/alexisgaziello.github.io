@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Papa from 'papaparse';
 
 import {
   Container,
@@ -23,23 +22,10 @@ import QuestionSlider from './filters/QuestionSlider.jsx'
 import Steps from './filters/Steps.jsx'
 import PaypalPaymentForm from './filters/PaypalPaymentForm.jsx'
 import UploadOptions from './filters/UploadOptions.jsx'
+import HiddenDiv from './General.jsx'
 
 import { blue, pink, yellow } from "../constants.js"
 
-import questionsConfig from '../data/questions.csv'
-
-function loadQuestions() {
-  const questionsComponents = []
-  questionsConfig.forEach(questionConfig => questionsComponents.push(
-    <QuestionSlider key={questionConfig.title}
-      title={questionConfig.title}
-      tryLink={questionConfig.tryLink}
-      initialSliderValue={questionConfig.initialSliderValue}
-    />
-  )
-  )
-  return questionsComponents
-}
 
 // Steps
 const stepsDescription = [
@@ -57,7 +43,7 @@ export default class MenuFilters extends React.Component {
 
   state = {
     //  Initial active step
-    activeStep: 0,
+    activeStep: 1,
     // Array to save steps that have been completed.
     completed: stepsDescription.map(() => false),
     // Boolean to indicate if the payement and file upload succeeded
@@ -168,66 +154,66 @@ export default class MenuFilters extends React.Component {
         <br />
 
         {/* Step 1: Upload file */}
-        {this.state.activeStep === 0 &&
-          <div>
-            <UploadOptions filtersQty={this.state.filtersQty} parentSetState={this.setState} />
+        <HiddenDiv hidden={(this.state.activeStep === 0)}>
+          <UploadOptions
+            filtersQty={this.state.filtersQty}
+            parentSetState={this.setState}
+          />
 
-            <br /><br />
+          <br /><br />
 
-            <Grid textAlign="center">
-              <Grid.Column>
-                <Popup
-                  content={ popUpContent }
-                  position="top center"
-                  trigger={
-                    <div>
-                      <Button
-                        disabled={!filesSelectedCorrectly || filesSelectedAreEqual}
-                        onClick={this.pushActiveStep}
-                        negative={filesSelectedAreEqual}
-                      >
-                        Next
-                      </Button>
-                    </div>
-                  } />
-              </Grid.Column>
-            </Grid>
-          </div>
-        }
+          <Grid textAlign="center">
+            <Grid.Column>
+              <Popup
+                content={popUpContent}
+                position="top center"
+                trigger={
+                  <div>
+                    <Button
+                      disabled={!filesSelectedCorrectly || filesSelectedAreEqual}
+                      onClick={this.pushActiveStep}
+                      negative={filesSelectedAreEqual}
+                    >
+                      Next
+                    </Button>
+                  </div>
+                } />
+            </Grid.Column>
+          </Grid>
+        </HiddenDiv>
+
 
         {/* Step 2: Payment */}
-        {this.state.activeStep === 1 &&
-          <div>
-            <PaypalPaymentForm></PaypalPaymentForm>
-            <Grid textAlign="center">
-              <Grid.Column>
-                <Button onClick={this.handleSubmission}> Submit </Button>
-              </Grid.Column>
-            </Grid>
-          </div>
-        }
+        <HiddenDiv hidden={this.state.activeStep === 1}>
+          <PaypalPaymentForm></PaypalPaymentForm>
+          <Grid textAlign="center">
+            <Grid.Column>
+              <Button onClick={this.handleSubmission}> Submit </Button>
+            </Grid.Column>
+          </Grid>
+        </HiddenDiv>
 
         {/* Final message */}
-        {this.state.activeStep === 2 &&
+        <HiddenDiv hidden={this.state.activeStep === 2}>
           <Segment loading={this.state.success === null} style={{ height: "200px" }}>
             {this.state.success
               ? <h1>Success</h1>
               : <h1>Failure</h1>
             }
           </Segment>
-        }
+        </HiddenDiv>
 
         <br />
 
         {/* Steps */}
-        {this.state.activeStep < 2 &&
+        <HiddenDiv hidden={this.state.activeStep < 2}>
           <Steps
             stepsDescription={stepsDescription}
             activeStep={this.state.activeStep}
             setActiveStep={this.setActiveStep}
             completed={this.state.completed}
           />
-        }
+        </HiddenDiv>
 
         <Button onClick={() => this.pushActiveStep()}></Button>
 

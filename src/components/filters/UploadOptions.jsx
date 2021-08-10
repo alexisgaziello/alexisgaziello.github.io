@@ -17,7 +17,7 @@ import {
 class UploadCard extends Component {
 
     state = {
-        fileName: null
+        fileName: null,
     }
 
     constructor(props) {
@@ -74,11 +74,12 @@ class UploadCard extends Component {
         let hiddenInput;
 
         return (
+            !(this.props.hidden === false) &&
             <Card centered>
                 {/* TODO: image preview when upload */}
                 <Button
                     icon={this.state.fileName ? "check" : "upload"}
-                    positive={ this.state.fileName }
+                    positive={this.state.fileName !== null}
                     size="massive"
                     style={{ height: "200px" }}
                     onClick={() => hiddenInput.click()}
@@ -102,8 +103,8 @@ class UploadCard extends Component {
                         <span className='date'>{this.state.fileName ? "" : ".jpg, .png, .pdf"}</span>
                     </Card.Meta>
                     <Card.Description>
-                    {this.state.fileName ? "Click again to select a different file" : "Select the file that will appear in your filter."}
-                        
+                        {this.state.fileName ? "Click again to select a different file" : "Select the file that will appear in your filter."}
+
                     </Card.Description>
                 </Card.Content>
             </Card>
@@ -115,6 +116,7 @@ export default class UploadOptions extends Component {
 
     render() {
         return (
+            !(this.props.hidden === false) &&
             <div>
 
                 <Grid columns={1} textAlign="center">
@@ -127,23 +129,23 @@ export default class UploadOptions extends Component {
                 </Grid>
 
                 <Grid stackable columns={this.props.filtersQty || 1 /* Number of filtersQty with a min of 1 (0 is error) */}>
-                    {this.props.filtersQty > 0 &&
 
-                        <Grid.Column>
-                            <UploadCard
-                                parentSetState={this.props.parentSetState}
-                                cardID={1}
-                            />
-                        </Grid.Column>
-                    }
-                    {this.props.filtersQty === 2 &&
-                        <Grid.Column>
-                            <UploadCard
-                                parentSetState={this.props.parentSetState}
-                                cardID={2}
-                            />
-                        </Grid.Column>
-                    }
+                    <Grid.Column>
+                        <UploadCard
+                            parentSetState={this.props.parentSetState}
+                            cardID={1}
+                            hidden={this.props.filtersQty > 0}
+                        />
+                    </Grid.Column>
+
+                    <Grid.Column>
+                        <UploadCard
+                            parentSetState={this.props.parentSetState}
+                            cardID={2}
+                            hidden={this.props.filtersQty === 2}
+                        />
+                    </Grid.Column>
+
                 </Grid>
 
 

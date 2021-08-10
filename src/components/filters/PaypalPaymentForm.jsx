@@ -13,9 +13,10 @@ import {
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 // Test
-const paypalMerchantID = "AfZpSjF_LjZeSBrPcr3irvh5M0yIuqwOVu6zpFuzqY6e6Wt3PP3pe8FZOwKXRBpoF3NliY10l_z6GLlH"
+const paypalClientID = "test";
+// const paypalClientID = "AfZpSjF_LjZeSBrPcr3irvh5M0yIuqwOVu6zpFuzqY6e6Wt3PP3pe8FZOwKXRBpoF3NliY10l_z6GLlH"
 //Prod
-//const paypalMerchantID = "AQxgGUy6jazNlDtkwUw6tUkzvLK2NlWFClPcW49PlKWMqTmsIrGv-IY9qrr_odQUkaAveHhIZ2SiRDgl"
+//const paypalClientID = "AQxgGUy6jazNlDtkwUw6tUkzvLK2NlWFClPcW49PlKWMqTmsIrGv-IY9qrr_odQUkaAveHhIZ2SiRDgl"
 
 export default class PaymentForm extends Component {
 
@@ -25,7 +26,7 @@ export default class PaymentForm extends Component {
         this.onApprove = this.onApprove.bind(this)
         this.onCancel = this.onCancel.bind(this)
         this.onError = this.onError.bind(this)
-      }
+    }
 
     createOrder(data, actions) {
         return actions.order
@@ -64,10 +65,10 @@ export default class PaymentForm extends Component {
     render() {
 
         const paypalOptions = {
-            "client-id": paypalMerchantID,
-            currency: "USD",
-            intent: "capture",
-            "data-client-token": "abc123xyz==",
+            "client-id": paypalClientID,
+            // currency: "USD",
+            // intent: "capture",
+            // "data-client-token": "abc123xyz==",
         };
 
         return (
@@ -82,13 +83,13 @@ export default class PaymentForm extends Component {
                         <br />
                         <br />
 
-                        <PayPalScriptProvider options={{ paypalOptions }}>
-                            <PayPalButtons 
-                                style={{ layout: "vertical", color: "gold"}}
-                                createOrder={this.createOrder}
-                                onApprove={this.onApprove}
-                                onError={this.onError}
-                                // forceReRender={[amount]}
+                        <PayPalScriptProvider options={ paypalOptions }>
+                            <PayPalButtons
+                                style={{ layout: "vertical", color: "white" }}
+                            // createOrder={this.createOrder}
+                            // onApprove={this.onApprove}
+                            // onError={this.onError}
+                            // forceReRender={[amount]}
                             />
                         </PayPalScriptProvider>
 
