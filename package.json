@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "@artsy/fresnel": "^1.7.0",
+    "@paypal/react-paypal-js": "^7.2.1",
     "@stripe/react-stripe-js": "^1.4.1",
     "@stripe/stripe-js": "^1.16.0",
     "dotenv": "^10.0.0",

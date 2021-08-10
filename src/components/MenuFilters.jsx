@@ -13,6 +13,7 @@ import {
   Card,
   Dimmer,
   Loader,
+  Popup,
 } from 'semantic-ui-react';
 
 import { motion } from "framer-motion"
@@ -20,7 +21,7 @@ import { motion } from "framer-motion"
 import RadioOptions from './filters/RadioOptions.jsx'
 import QuestionSlider from './filters/QuestionSlider.jsx'
 import Steps from './filters/Steps.jsx'
-import PaymentForm from './filters/PaymentForm.jsx'
+import PaypalPaymentForm from './filters/PaypalPaymentForm.jsx'
 import UploadOptions from './filters/UploadOptions.jsx'
 
 import { blue, pink, yellow } from "../constants.js"
@@ -60,11 +61,14 @@ export default class MenuFilters extends React.Component {
     // Array to save steps that have been completed.
     completed: stepsDescription.map(() => false),
     // Boolean to indicate if the payement and file upload succeeded
+    filtersQty: 1,
     success: null,
+    error_message: "",
   };
 
   constructor(props) {
     super(props)
+    this.setState = this.setState.bind(this);
     this.setActiveStep = this.setActiveStep.bind(this)
     this.pushActiveStep = this.pushActiveStep.bind(this)
     this.handleSubmission = this.handleSubmission.bind(this)
@@ -86,7 +90,7 @@ export default class MenuFilters extends React.Component {
       const timestamp = Date.now();
       const extension = file.fileContentType.split("/").pop()
       // TODO ENABLE CORS??
-      
+
       const url = `https://pa5xypqpp8.execute-api.us-east-1.amazonaws.com/prod/filters-menus/${customerID}_${timestamp}.${extension}`;
 
       let response = await fetch(url,
@@ -138,6 +142,25 @@ export default class MenuFilters extends React.Component {
       hidden: { opacity: 0, y: "-100%", transition: { when: "beforeChildren" } },
     }
 
+    const filesSelectedCorrectly = (
+      this.state.file1
+      && (this.state.filtersQty === 1
+        || (this.state.filtersQty === 2 && this.state.file2))
+    )
+
+    const filesSelectedAreEqual = (
+      this.state.file1 && this.state.file2
+      && this.state.file1.fileData === this.state.file2.fileData
+    )
+
+
+    const popUpContent = filesSelectedAreEqual
+      ? "Please, select 2 different files!"
+      : filesSelectedCorrectly
+        ? "Proceed to payment"
+        : `Upload ${this.state.filtersQty} file${this.state.filtersQty === 1 ? "" : "s"} first`
+
+
     return (
       <Container>
 
@@ -146,13 +169,36 @@ export default class MenuFilters extends React.Component {
 
         {/* Step 1: Upload file */}
         {this.state.activeStep === 0 &&
-        <UploadOptions pushActiveStep={this.pushActiveStep}/>
+          <div>
+            <UploadOptions filtersQty={this.state.filtersQty} parentSetState={this.setState} />
+
+            <br /><br />
+
+            <Grid textAlign="center">
+              <Grid.Column>
+                <Popup
+                  content={ popUpContent }
+                  position="top center"
+                  trigger={
+                    <div>
+                      <Button
+                        disabled={!filesSelectedCorrectly || filesSelectedAreEqual}
+                        onClick={this.pushActiveStep}
+                        negative={filesSelectedAreEqual}
+                      >
+                        Next
+                      </Button>
+                    </div>
+                  } />
+              </Grid.Column>
+            </Grid>
+          </div>
         }
 
         {/* Step 2: Payment */}
         {this.state.activeStep === 1 &&
           <div>
-            <PaymentForm></PaymentForm>
+            <PaypalPaymentForm></PaypalPaymentForm>
             <Grid textAlign="center">
               <Grid.Column>
                 <Button onClick={this.handleSubmission}> Submit </Button>

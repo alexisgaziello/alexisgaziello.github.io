@@ -56,7 +56,7 @@ class UploadCard extends Component {
             fileContentType: fileContentType,
         }
 
-        this.props.pushActiveStep({
+        this.props.parentSetState({
             [`file${file_id}`]: file
         });
     }
@@ -101,10 +101,6 @@ class UploadCard extends Component {
 
 export default class UploadOptions extends Component {
 
-    state = {
-        uploads: 1,
-    }
-
     render() {
         return (
             <div>
@@ -112,26 +108,26 @@ export default class UploadOptions extends Component {
                 <Grid columns={1} textAlign="center">
 
                 <Button.Group>
-                    <Button positive={this.state.uploads === 1} onClick={() => this.setState({uploads: 1})}>1 Filter</Button>
+                    <Button positive={this.props.filtersQty === 1} onClick={() => this.props.parentSetState({filtersQty: 1})}>1 Filter</Button>
                     <Button.Or />
-                    <Button positive={this.state.uploads === 2} onClick={() => this.setState({uploads: 2})}>2 Filters</Button>
+                    <Button positive={this.props.filtersQty === 2} onClick={() => this.props.parentSetState({filtersQty: 2})}>2 Filters</Button>
                 </Button.Group>
                 </Grid>
 
-                <Grid stackable columns={this.state.uploads || 1 /* Number of uploads with a min of 1 (0 is error) */}>
-                    {this.state.uploads > 0 &&
+                <Grid stackable columns={this.props.filtersQty || 1 /* Number of filtersQty with a min of 1 (0 is error) */}>
+                    {this.props.filtersQty > 0 &&
 
                         <Grid.Column>
                             <UploadCard
-                                pushActiveStep={this.props.pushActiveStep}
+                                parentSetState={this.props.parentSetState}
                                 cardID={1}
                             />
                         </Grid.Column>
                     }
-                    {this.state.uploads === 2 &&
+                    {this.props.filtersQty === 2 &&
                         <Grid.Column>
                             <UploadCard
-                                pushActiveStep={this.props.pushActiveStep}
+                                parentSetState={this.props.parentSetState}
                                 cardID={2}
                             />
                         </Grid.Column>
