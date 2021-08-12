@@ -24,7 +24,6 @@ export default class PaymentForm extends Component {
         super(props)
         this.createOrder = this.createOrder.bind(this)
         this.onApprove = this.onApprove.bind(this)
-        this.onCancel = this.onCancel.bind(this)
         this.onError = this.onError.bind(this)
     }
 
@@ -47,18 +46,17 @@ export default class PaymentForm extends Component {
 
     onApprove(data, actions) {
         return actions.order.capture().then(function (details) {
-            setOnApproveMessage(
-                `Transaction completed by ${details.payer.name.given_name}!`
-            );
+            details.payer.name.given_name
         });
     }
 
-    onCancel(data, actions) {
-
-    }
 
     onError(error) {
-        setOnErrorMessage(err.toString());
+        this.parentSetState({
+            activeStep: 3,
+            success: false,
+            error_message: error
+        })
     }
 
 
@@ -67,7 +65,7 @@ export default class PaymentForm extends Component {
         const paypalOptions = {
             "client-id": paypalClientID,
             // currency: "USD",
-            // intent: "capture",
+            // intent: "authorize",
             // "data-client-token": "abc123xyz==",
         };
 
@@ -88,7 +86,7 @@ export default class PaymentForm extends Component {
                                 style={{ layout: "vertical", color: "white" }}
                             // createOrder={this.createOrder}
                             // onApprove={this.onApprove}
-                            // onError={this.onError}
+                                onError={this.onError}
                             // forceReRender={[amount]}
                             />
                         </PayPalScriptProvider>

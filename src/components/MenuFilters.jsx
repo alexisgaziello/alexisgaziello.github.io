@@ -160,7 +160,7 @@ export default class MenuFilters extends React.Component {
             parentSetState={this.setState}
           />
 
-          <br /><br />
+          <br /> <br />
 
           <Grid textAlign="center">
             <Grid.Column>
@@ -185,7 +185,7 @@ export default class MenuFilters extends React.Component {
 
         {/* Step 2: Payment */}
         <HiddenDiv hidden={this.state.activeStep === 1}>
-          <PaypalPaymentForm></PaypalPaymentForm>
+          <PaypalPaymentForm parentSetState={this.setState}></PaypalPaymentForm>
           <Grid textAlign="center">
             <Grid.Column>
               <Button onClick={this.handleSubmission}> Submit </Button>
@@ -193,17 +193,38 @@ export default class MenuFilters extends React.Component {
           </Grid>
         </HiddenDiv>
 
+
         {/* Final message */}
         <HiddenDiv hidden={this.state.activeStep === 2}>
           <Segment loading={this.state.success === null} style={{ height: "200px" }}>
             {this.state.success
-              ? <h1>Success</h1>
-              : <h1>Failure</h1>
+
+              ? <div>
+                <h1>Success</h1>
+                <p>We are happy to inform you that we have received your order!</p>
+                <p>Our team will start working on your custom filter and you will receive it by email
+                  in 24h. If you have any questions please do not hesitate and contact us at 
+                  <a href='mailto:insta.filters.contact@gmail.com'>insta.filters.contact@gmail.com</a>.
+                  </p>
+              </div>
+
+              : <div>
+                <h1>Failure</h1>
+                <p>It looks like there was an error :(</p>
+                <p>{this.state.error_message}</p>
+                <p>Please, send an email to
+                  <a href='mailto:insta.filters.contact@gmail.com'>insta.filters.contact@gmail.com</a>
+                  detailing what happened and we will try to get back to you as soon as possible.
+                  We are deeply sorry for the inconvenience.
+                </p>
+              </div>
             }
           </Segment>
         </HiddenDiv>
 
+
         <br />
+
 
         {/* Steps */}
         <HiddenDiv hidden={this.state.activeStep < 2}>
