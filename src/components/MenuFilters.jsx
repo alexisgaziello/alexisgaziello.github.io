@@ -185,7 +185,7 @@ export default class MenuFilters extends React.Component {
 
         {/* Step 2: Payment */}
         <HiddenDiv hidden={this.state.activeStep === 1}>
-          <PaypalPaymentForm parentSetState={this.setState}></PaypalPaymentForm>
+          <PaypalPaymentForm parentSetState={this.setState} filtersQty={this.state.filtersQty}></PaypalPaymentForm>
           <Grid textAlign="center">
             <Grid.Column>
               <Button onClick={this.handleSubmission}> Submit </Button>

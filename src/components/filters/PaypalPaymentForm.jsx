@@ -13,10 +13,12 @@ import {
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 // Test
-const paypalClientID = "test";
-// const paypalClientID = "AfZpSjF_LjZeSBrPcr3irvh5M0yIuqwOVu6zpFuzqY6e6Wt3PP3pe8FZOwKXRBpoF3NliY10l_z6GLlH"
-//Prod
-//const paypalClientID = "AQxgGUy6jazNlDtkwUw6tUkzvLK2NlWFClPcW49PlKWMqTmsIrGv-IY9qrr_odQUkaAveHhIZ2SiRDgl"
+// const paypalClientID = "test";
+const paypalClientID = "AfZpSjF_LjZeSBrPcr3irvh5M0yIuqwOVu6zpFuzqY6e6Wt3PP3pe8FZOwKXRBpoF3NliY10l_z6GLlH"
+// Prod
+// const paypalClientID = "AQxgGUy6jazNlDtkwUw6tUkzvLK2NlWFClPcW49PlKWMqTmsIrGv-IY9qrr_odQUkaAveHhIZ2SiRDgl"
+
+const paypal_backend_url = "https://m8qidd33f5.execute-api.us-east-1.amazonaws.com/default/paypal-payment-backend-application"
 
 export default class PaymentForm extends Component {
 
@@ -28,24 +30,27 @@ export default class PaymentForm extends Component {
     }
 
     createOrder(data, actions) {
-        return actions.order
-            .create({
-                purchase_units: [
-                    {
-                        amount: {
-                            value: this.props.amount,
-                        },
-                    },
-                ],
-            })
-            .then((orderID) => {
-                setOrderID(orderID);
-                return orderID;
-            });
+        return fetch(paypal_backend_url, {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: {
+                "filters_quantity": this.props.filtersQty
+            }
+        }).then(function (res) {
+            console.log(res)
+            return res.json();
+        }).then(function (data) {
+            console.log(data)
+            return data.id; // Use the key sent by your server's response, ex. 'id' or 'token'
+        });
     }
 
     onApprove(data, actions) {
+        console.log(data, actions)
         return actions.order.capture().then(function (details) {
+            console.log(details)
             details.payer.name.given_name
         });
     }
@@ -81,13 +86,13 @@ export default class PaymentForm extends Component {
                         <br />
                         <br />
 
-                        <PayPalScriptProvider options={ paypalOptions }>
+                        <PayPalScriptProvider options={paypalOptions}>
                             <PayPalButtons
                                 style={{ layout: "vertical", color: "white" }}
-                            // createOrder={this.createOrder}
-                            // onApprove={this.onApprove}
+                                createOrder={this.createOrder}
+                                onApprove={this.onApprove}
                                 onError={this.onError}
-                            // forceReRender={[amount]}
+                                forceReRender={[this.props.filtersQty]}
                             />
                         </PayPalScriptProvider>
 
