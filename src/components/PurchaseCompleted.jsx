@@ -48,7 +48,9 @@ export const PurchaseCompleted = () => {
                         <span style={{ backgroundColor: pink, fontWeight: "bold" }}> {'\u00A0'} {errorMessage} {'\u00A0'} </span>
                     </p>
                     <p>Please, send an email to
-                        <a href='mailto:insta.filters.contact@gmail.com'>insta.filters.contact@gmail.com</a>
+                        <a href='mailto:insta.filters.contact@gmail.com'>
+                            {'\u00A0'} insta.filters.contact@gmail.com {'\u00A0'}
+                        </a>
                         detailing what happened and we will try to get back to you as soon as possible.
                         We are deeply sorry for the inconvenience.
                     </p>

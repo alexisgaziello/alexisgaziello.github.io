@@ -26,7 +26,7 @@ import { motion } from "framer-motion"
 import RadioOptions from './filters/RadioOptions.jsx'
 import QuestionSlider from './filters/QuestionSlider.jsx'
 import { Steps } from './filters/Steps.jsx'
-import PaypalPaymentForm from './filters/PaypalPaymentForm.jsx'
+import { PaypalPaymentForm } from './filters/PaypalPaymentForm.jsx'
 import { UploadOptions } from './filters/UploadOptions.jsx'
 import HiddenDiv from './General.jsx'
 
@@ -84,11 +84,6 @@ export const MenuFilters = () => {
   }
 
   const setActiveStep = (index) => {
-    // if (index > completed.findIndex((isCompleted) => !isCompleted) + 1 && !completed[index]) {
-    //   // We don't want skipping steps
-    //   console.log("bro?")
-    //   return;
-    // }
     completed[index - 1] = true;
     setCompleted(completed);
     setActiveStepOnly(index)
@@ -109,6 +104,15 @@ export const MenuFilters = () => {
     file1 && file2
     && file1.fileData === file2.fileData
   )
+
+  const onError = (error, setSuccess) => {
+    console.error(error)
+    if (!setSuccess) {
+      setSuccess = setSuccess1
+    }
+    setErrorMessage(error.message)
+    setSuccess(false)
+  }
 
   const uploadFile = async ({ fileName, fileData, fileContentType, fileID }, setSuccess) => {
 
@@ -131,15 +135,12 @@ export const MenuFilters = () => {
       success = true;
     } catch (error) {
       // Failure
-      success = false;
-      console.log(error)
-      setErrorMessage(error)
+      onError(error, setSuccess)
     } finally {
       // Set state
       setSuccess(success)
     }
   }
-
 
   const popUpContent = filesSelectedAreEqual
     ? "Please, select 2 different files!"
@@ -198,7 +199,11 @@ export const MenuFilters = () => {
 
       {/* Step 2: Payment */}
       <HiddenDiv isHidden={activeStep === 1}>
-        <PaypalPaymentForm parentSetState={setActiveStep} filtersQty={filtersQty}></PaypalPaymentForm>
+        <PaypalPaymentForm
+          setActiveStep={setActiveStep}
+          filtersQty={filtersQty}
+          onError={onError}
+        ></PaypalPaymentForm>
         <Grid textAlign="center">
           <Grid.Column>
             <Button onClick={handleSubmission}> Submit </Button>
