@@ -54,9 +54,9 @@ module.exports = {
         }),
         new CopyPlugin({
             patterns: [
-              { from: "src/assets/images", to: "images" },
+                { from: "src/assets/images", to: "images" },
             ],
-          }),
+        }),
     ],
     module: {
         rules: [
@@ -100,13 +100,13 @@ module.exports = {
                 test: /\.(csv|tsv)$/,
                 loader: 'csv-loader',
                 options: {
-                  dynamicTyping: true,
-                  header: true,
-                  skipEmptyLines: true
+                    dynamicTyping: true,
+                    header: true,
+                    skipEmptyLines: true
                 }
-              }
+            }
         ],
     },
     devtool: "source-map",
-    target: 'node',
+    target: 'web',
 };

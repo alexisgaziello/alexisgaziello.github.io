@@ -1,31 +1,18 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
 import {
     Button,
-    Checkbox,
-    Form,
-    Input,
     Grid,
-    Select,
-    TextArea,
-    Header,
     Card,
-    Image,
 } from 'semantic-ui-react'
 
 
-class UploadCard extends Component {
+const UploadCard = ({ isHidden, fileID, setFile }) => {
 
-    state = {
-        fileName: null,
-    }
+    const [fileName, setFileName] = useState(null);
 
-    constructor(props) {
-        super(props)
-        this.fileSelected = this.fileSelected.bind(this)
-    }
+    const handleFileInput = async (event) => {
 
-    async fileSelected(event, file_id) {
         const selectedFiles = event.target.files;
         //Check File is not Empty
         if (selectedFiles.length == 0) {
@@ -34,6 +21,7 @@ class UploadCard extends Component {
         // Select the very first file from list
         const fileToLoad = selectedFiles[0];
         const fileName = fileToLoad.name;
+        const fileContentType = fileToLoad.type;
 
         const fileLoader = async () => {
             return new Promise((resolve, reject) => {
@@ -47,111 +35,93 @@ class UploadCard extends Component {
             })
         }
 
-        const fileEncoded = await fileLoader();
+        const fileData = await fileLoader();
 
-        const fileEncodedSplitted = fileEncoded.split(";")
-
-        const fileData = fileEncodedSplitted[1].split(",").pop()
-        const fileContentType = fileEncodedSplitted[0].split(":").pop()
-
-        // Save file
-        const file = {
-            fileName: fileName,
+        setFileName(fileName)
+        setFile({
             fileData: fileData,
+            fileName: fileName,
             fileContentType: fileContentType,
-        }
-
-        this.setState({
-            fileName: fileName
+            fileID: fileID,
         })
-
-        this.props.parentSetState({
-            [`file${file_id}`]: file
-        });
     }
 
-    render() {
-        let hiddenInput;
+    let hiddenInput;
 
-        return (
-            !(this.props.hidden === false) &&
-            <Card centered>
-                {/* TODO: image preview when upload */}
-                <Button
-                    icon={this.state.fileName ? "check" : "upload"}
-                    positive={this.state.fileName !== null}
-                    size="massive"
-                    style={{ height: "200px" }}
-                    onClick={() => hiddenInput.click()}
-                />
+    return (
+        !(isHidden === false) &&
+        <Card centered>
+            {/* TODO: image preview when upload */}
+            <Button
+                icon={fileName ? "check" : "upload"}
+                positive={fileName !== null}
+                size="massive"
+                style={{ height: "200px" }}
+                onClick={() => hiddenInput.click()}
+            />
 
-                <input
-                    hidden
-                    type="file"
-                    name="file"
-                    onChange={(event) => this.fileSelected(event, this.props.cardID)}
-                    ref={element => {
-                        hiddenInput = element
-                    }}
-                    accept=".jpg,.jpeg,.png,.pdf"
-                />
+            <input
+                hidden
+                type="file"
+                name="file"
+                onChange={handleFileInput}
+                ref={element => {
+                    hiddenInput = element
+                }}
+                accept=".jpg,.jpeg,.png,.pdf"
+            />
 
-                {/* Card Description */}
-                <Card.Content>
-                    <Card.Header>{this.state.fileName ? this.state.fileName : "Upload File"}</Card.Header>
-                    <Card.Meta>
-                        <span className='date'>{this.state.fileName ? "" : ".jpg, .png, .pdf"}</span>
-                    </Card.Meta>
-                    <Card.Description>
-                        {this.state.fileName ? "Click again to select a different file" : "Select the file that will appear in your filter."}
+            {/* Card Description */}
+            <Card.Content>
+                <Card.Header>{fileName ? fileName : "Upload File"}</Card.Header>
+                <Card.Meta>
+                    <span className='date'>{fileName ? "" : ".jpg, .png, .pdf"}</span>
+                </Card.Meta>
+                <Card.Description>
+                    {fileName ? "Click again to select a different file" : "Select the file that will appear in your filter."}
 
-                    </Card.Description>
-                </Card.Content>
-            </Card>
-        )
-    }
+                </Card.Description>
+            </Card.Content>
+        </Card>
+    )
 }
 
-export default class UploadOptions extends Component {
 
-    render() {
-        return (
-            !(this.props.hidden === false) &&
-            <div>
+export const UploadOptions = ({ isHidden, filtersQty, setFiltersQty, setFile1, setFile2}) => {
 
-                <Grid columns={1} textAlign="center">
+    return (
+        !(isHidden === false) &&
+        <div>
 
-                    <Button.Group>
-                        <Button positive={this.props.filtersQty === 1} onClick={() => this.props.parentSetState({ filtersQty: 1 })}>1 Filter</Button>
-                        <Button.Or />
-                        <Button positive={this.props.filtersQty === 2} onClick={() => this.props.parentSetState({ filtersQty: 2 })}>2 Filters</Button>
-                    </Button.Group>
-                </Grid>
+            <Grid columns={1} textAlign="center">
 
-                <Grid stackable columns={this.props.filtersQty || 1 /* Number of filtersQty with a min of 1 (0 is error) */}>
+                <Button.Group>
+                    <Button positive={filtersQty === 1} onClick={() => setFiltersQty(1)}>1 Filter</Button>
+                    <Button.Or />
+                    <Button positive={filtersQty === 2} onClick={() => setFiltersQty(2)}>2 Filters</Button>
+                </Button.Group>
+            </Grid>
 
-                    <Grid.Column>
-                        <UploadCard
-                            parentSetState={this.props.parentSetState}
-                            cardID={1}
-                            hidden={this.props.filtersQty > 0}
-                        />
-                    </Grid.Column>
+            <Grid stackable columns={filtersQty || 1 /* Number of filtersQty with a min of 1 (0 is error) */}>
 
-                    <Grid.Column>
-                        <UploadCard
-                            parentSetState={this.props.parentSetState}
-                            cardID={2}
-                            hidden={this.props.filtersQty === 2}
-                        />
-                    </Grid.Column>
+                <Grid.Column>
+                    <UploadCard
+                        isHidden={filtersQty > 0}
+                        parentSetState={setFiltersQty}
+                        fileID={1}
+                        setFile={setFile1}
+                    />
+                </Grid.Column>
 
-                </Grid>
-
-
-            </div>
-
-        )
-    }
-
+                <Grid.Column>
+                    <UploadCard
+                        isHidden={filtersQty > 1}
+                        parentSetState={setFiltersQty}
+                        fileID={2}
+                        setFile={setFile2}
+                    />
+                </Grid.Column>
+            </Grid>
+        </div>
+    )
 }

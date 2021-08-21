@@ -2,7 +2,8 @@ import React from 'react';
 
 import About from './components/About.jsx'
 import Filters from './components/Filters.jsx'
-import MenuFilters from './components/MenuFilters.jsx'
+import { MenuFilters } from './components/MenuFilters.jsx'
+import { PurchaseCompleted } from './components/PurchaseCompleted.jsx'
 import Home from './components/Home.jsx'
 import NotFoundPage from './components/NotFoundPage.jsx'
 
@@ -89,6 +90,7 @@ const App = () => {
                 {/* <Route path="/about" component={About} /> */}
                 {/* <Route path="/filters" component={Filters} /> */}
                 <Route path="/menu-filters" component={MenuFilters} />
+                <Route path="/purchase-completed" component={PurchaseCompleted} />
                 <Route component={NotFoundPage} />
             </Switch>
 

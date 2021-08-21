@@ -16,7 +16,7 @@ import { motion } from "framer-motion"
 
 import RadioOptions from './filters/RadioOptions.jsx'
 import QuestionSlider from './filters/QuestionSlider.jsx'
-import Steps from './filters/Steps.jsx'
+import { Steps } from './filters/Steps.jsx'
 
 import { blue, pink, yellow } from "../constants.js"
 
