@@ -1,26 +1,11 @@
-import React, { useState } from 'react'
-import {
-    S3Client,
-    PutObjectCommand,
-} from "@aws-sdk/client-s3";
+import React from 'react'
 
 import {
-    Container,
-    Header,
-    Segment,
-    Form,
-    Radio,
-    Button,
-    Icon,
-    Grid,
-    Card,
-    Dimmer,
-    Loader,
-    Popup,
+    Container
 } from 'semantic-ui-react';
 
 import { useLocation } from "react-router-dom";
-import { blue, pink, yellow } from "../constants.js"
+import { blue, pink } from "../constants.js"
 
 
 export const PurchaseCompleted = () => {
