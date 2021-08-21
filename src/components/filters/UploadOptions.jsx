@@ -102,6 +102,9 @@ export const UploadOptions = ({ isHidden, filtersQty, setFiltersQty, setFile1, s
                 </Button.Group>
             </Grid>
 
+            <br />
+            <br />
+
             <Grid stackable columns={filtersQty || 1 /* Number of filtersQty with a min of 1 (0 is error) */}>
 
                 <Grid.Column>

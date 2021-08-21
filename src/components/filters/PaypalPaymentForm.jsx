@@ -48,6 +48,10 @@ export const PaypalPaymentForm = (filtersQty, onError, setActiveStep) => {
         });
     }
 
+    const onError2 = (e) => {
+        onError(e);
+    }
+
     const paypalOptions = {
         "client-id": paypalClientID,
         // currency: "USD",
@@ -72,7 +76,7 @@ export const PaypalPaymentForm = (filtersQty, onError, setActiveStep) => {
                             style={{ layout: "vertical", color: "white" }}
                             createOrder={createOrder}
                             onApprove={onApprove}
-                            onError={onError}
+                            onError={onError2}
                             forceReRender={[filtersQty]}
                         />
                     </PayPalScriptProvider>

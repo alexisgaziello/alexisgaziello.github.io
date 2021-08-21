@@ -174,7 +174,8 @@ export const MenuFilters = () => {
           setFile2={setFile2}
         />
 
-        <br /> <br />
+        <br />
+        <br />
 
         <Grid textAlign="center">
           <Grid.Column>
