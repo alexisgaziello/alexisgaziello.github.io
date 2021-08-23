@@ -58,7 +58,7 @@ export const MenuFilters = () => {
 
   const history = useHistory();
 
-  const [activeStep, setActiveStepOnly] = useState(0);
+  const [activeStep, setActiveStepOnly] = useState(1);
   const [completed, setCompleted] = useState(stepsDescription.map(() => false));
   const [filtersQty, setFiltersQty] = useState(1);
   const [errorMessage, setErrorMessage] = useState("");

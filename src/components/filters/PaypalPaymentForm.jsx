@@ -18,26 +18,29 @@ const paypalClientID = "AfZpSjF_LjZeSBrPcr3irvh5M0yIuqwOVu6zpFuzqY6e6Wt3PP3pe8FZ
 // Prod
 // const paypalClientID = "AQxgGUy6jazNlDtkwUw6tUkzvLK2NlWFClPcW49PlKWMqTmsIrGv-IY9qrr_odQUkaAveHhIZ2SiRDgl"
 
-const paypal_backend_url = "https://m8qidd33f5.execute-api.us-east-1.amazonaws.com/default/paypal-payment-backend-application"
+//const paypalBackendURL = "http://localhost:9000/2015-03-31/functions/function/invocations"
+const paypalBackendURL = "https://qzgybsrz8h.execute-api.us-east-1.amazonaws.com/default/paypal-payment-backend-application"
 
-export const PaypalPaymentForm = (filtersQty, onError, setActiveStep) => {
+export const PaypalPaymentForm = (filtersQty, setActiveStep) => {
 
-    const createOrder = (data, actions) => {
-        return fetch(paypal_backend_url, {
-            method: 'post',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: {
-                "filters_quantity": filtersQty
-            }
-        }).then(function (res) {
-            console.log(res)
-            return res.json();
-        }).then(function (data) {
-            console.log(data)
-            return data.id; // Use the key sent by your server's response, ex. 'id' or 'token'
-        });
+    const createOrder = async (data, actions) => {
+
+        const requestBody = {
+            method: 'POST',
+            headers: new Headers({
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(filtersQty),
+        };
+        try {
+            const response = await fetch(paypalBackendURL, requestBody);
+            const jsonResponse = await response.json();
+            return jsonResponse.id;
+        } catch (error) {
+            console.log(error);
+            throw new Error(error);
+        }
     }
 
     const onApprove = (data, actions) => {
@@ -48,8 +51,8 @@ export const PaypalPaymentForm = (filtersQty, onError, setActiveStep) => {
         });
     }
 
-    const onError2 = (e) => {
-        onError(e);
+    const onError = (e) => {
+        console.log(e);
     }
 
     const paypalOptions = {
@@ -76,14 +79,19 @@ export const PaypalPaymentForm = (filtersQty, onError, setActiveStep) => {
                             style={{ layout: "vertical", color: "white" }}
                             createOrder={createOrder}
                             onApprove={onApprove}
-                            onError={onError2}
+                            onError={onError}
                             forceReRender={[filtersQty]}
                         />
                     </PayPalScriptProvider>
 
                 </Grid.Column>
+
             </Grid>
+
             <br />
+
+            <Button onClick={() => createOrder()}></Button>
+
 
         </div>
     )
