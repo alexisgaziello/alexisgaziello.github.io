@@ -21,17 +21,23 @@ const paypalClientID = "AfZpSjF_LjZeSBrPcr3irvh5M0yIuqwOVu6zpFuzqY6e6Wt3PP3pe8FZ
 //const paypalBackendURL = "http://localhost:9000/2015-03-31/functions/function/invocations"
 const paypalBackendURL = "https://qzgybsrz8h.execute-api.us-east-1.amazonaws.com/default/paypal-payment-backend-application"
 
-export const PaypalPaymentForm = (filtersQty, setActiveStep) => {
+
+export const PaypalPaymentForm = ({
+    filtersQty,
+    pushActiveStep,
+    handleUploads,
+    onError,
+}) => {
 
     const createOrder = async (data, actions) => {
 
         const requestBody = {
             method: 'POST',
             headers: new Headers({
-                'Accept' : 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }),
-            body: JSON.stringify(filtersQty),
+            body: JSON.stringify({filtersQty: filtersQty}),
         };
         try {
             const response = await fetch(paypalBackendURL, requestBody);
@@ -44,15 +50,17 @@ export const PaypalPaymentForm = (filtersQty, setActiveStep) => {
     }
 
     const onApprove = (data, actions) => {
-        console.log(data, actions)
+        console.log('data')
+        console.log(data)
+        console.log('actions')
+        console.log(actions)
         return actions.order.capture().then(function (details) {
-            console.log(details)
-            details.payer.name.given_name
+            pushActiveStep();
+            const payerName = [details.payer.name.given_name, details.payer.name.surname].join(" ");
+            const payerEmail = details.payer.email_address;
+            const transactionID = details.id;
+            handleUploads(transactionID, payerEmail, payerName);
         });
-    }
-
-    const onError = (e) => {
-        console.log(e);
     }
 
     const paypalOptions = {
@@ -89,9 +97,6 @@ export const PaypalPaymentForm = (filtersQty, setActiveStep) => {
             </Grid>
 
             <br />
-
-            <Button onClick={() => createOrder()}></Button>
-
 
         </div>
     )

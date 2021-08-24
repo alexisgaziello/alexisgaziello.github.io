@@ -5,7 +5,7 @@ import {
 } from 'semantic-ui-react';
 
 import { useLocation } from "react-router-dom";
-import { blue, pink } from "../constants.js"
+import { blue, pink, green} from "../constants.js"
 
 
 export const PurchaseCompleted = () => {
@@ -15,11 +15,13 @@ export const PurchaseCompleted = () => {
 
     let errorMessage = "";
     let transactionID = "";
+    let payerName = "";
 
     const success = locationItems[2] === "success";
 
     if (success) {
         transactionID = locationItems[3];
+        payerName = locationItems[4];
     } else {
         errorMessage = locationItems[3];
     }
@@ -32,7 +34,8 @@ export const PurchaseCompleted = () => {
 
             {success
                 ? <div>
-                    <h1>Success</h1>
+                    <h1 style={{color: green, textAlign: "center"}} >Success!</h1>
+                    <h2>{payerName}:</h2>
                     <p>We are happy to inform you that we have received your order!</p>
                     <p>You transaction ID is: <span style={{ backgroundColor: blue, fontWeight: "bold" }}> {'\u00A0'} {transactionID} {'\u00A0'} </span></p>
                     <p>Our team will start working on your custom filter. You will receive it by email
@@ -42,7 +45,7 @@ export const PurchaseCompleted = () => {
                 </div>
 
                 : <div>
-                    <h1>Failure</h1>
+                    <h1 style={{color: pink, textAlign: "center"}} >Failure</h1>
                     <p>It looks like there was an error :(</p>
                     <p>Error message:
                         <span style={{ backgroundColor: pink, fontWeight: "bold" }}> {'\u00A0'} {errorMessage} {'\u00A0'} </span>

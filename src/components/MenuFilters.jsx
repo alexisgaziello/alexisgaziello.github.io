@@ -58,24 +58,29 @@ export const MenuFilters = () => {
 
   const history = useHistory();
 
-  const [activeStep, setActiveStepOnly] = useState(1);
+  const [activeStep, setActiveStepOnly] = useState(0);
   const [completed, setCompleted] = useState(stepsDescription.map(() => false));
   const [filtersQty, setFiltersQty] = useState(1);
-  const [errorMessage, setErrorMessage] = useState("");
   const [file1, setFile1] = useState(null);
   const [file2, setFile2] = useState(null);
-  // TODO: get id
-  const [transactionID, setTransactionID] = useState("test");
-  const [success1, setSuccess1] = useState(null);
-  const [success2, setSuccess2] = useState(null);
 
-  const handleSubmission = async () => {
-    pushActiveStep();
-    const uploadFile1 = uploadFile(file1, setSuccess1);
-    if (filtersQty > 1) {
-      const uploadFile2 = uploadFile(file2, setSuccess2);
-    } else {
-      setSuccess2(true)
+  const handleUploads = async (transactionID, payerEmail, payerName) => {
+    // TODO: cancel if error?
+    try {
+      const uploadFile1 = uploadFile(file1, transactionID);
+      // TODO: send email
+      if (filtersQty > 1) {
+        const uploadFile2 = uploadFile(file2, transactionID);
+        await uploadFile2;
+      }
+      await uploadFile1;
+
+      // Success
+      history.push(["/purchase-completed", "success", transactionID, payerName].join("/"));
+
+    } catch (error) {
+      // Failure
+      onError(error)
     }
   }
 
@@ -105,16 +110,7 @@ export const MenuFilters = () => {
     && file1.fileData === file2.fileData
   )
 
-  const onError = (error, setSuccess) => {
-    console.error(error)
-    if (!setSuccess) {
-      setSuccess = setSuccess1
-    }
-    setErrorMessage(error.message)
-    setSuccess(false)
-  }
-
-  const uploadFile = async ({ fileName, fileData, fileContentType, fileID }, setSuccess) => {
+  const uploadFile = ({ fileName, fileData, fileContentType, fileID }, transactionID) => {
 
     // TODO: add timestamp?? const timestamp = Date.now();
     const ID_fileName = [transactionID, fileID, fileName].join("_");
@@ -128,18 +124,12 @@ export const MenuFilters = () => {
 
     const command = new PutObjectCommand(input);
 
-    let success;
-    try {
-      const data = await client.send(command);
-      // Success
-      success = true;
-    } catch (error) {
-      // Failure
-      onError(error, setSuccess)
-    } finally {
-      // Set state
-      setSuccess(success)
-    }
+    return client.send(command);
+  }
+
+  const onError = (error) => {
+    console.log(error)
+    history.push(["/purchase-completed", "failure", error].join("/"));
   }
 
   const popUpContent = filesSelectedAreEqual
@@ -147,17 +137,6 @@ export const MenuFilters = () => {
     : filesSelectedCorrectly
       ? "Proceed to payment"
       : `Upload ${filtersQty} file${filtersQty === 1 ? "" : "s"} first`
-
-  useEffect(() => {
-    if (success1 !== null && success2 !== null) {
-      const success = success1 && success2;
-      history.push(
-        "/purchase-completed/" +
-        (success ? "success/" : "failure/") +
-        (success ? transactionID : errorMessage)
-      )
-    }
-  })
 
   return (
     <Container>
@@ -201,15 +180,11 @@ export const MenuFilters = () => {
       {/* Step 2: Payment */}
       <HiddenDiv isHidden={activeStep === 1}>
         <PaypalPaymentForm
-          setActiveStep={setActiveStep}
           filtersQty={filtersQty}
+          pushActiveStep={pushActiveStep}
+          handleUploads={handleUploads}
           onError={onError}
         ></PaypalPaymentForm>
-        <Grid textAlign="center">
-          <Grid.Column>
-            <Button onClick={handleSubmission}> Submit </Button>
-          </Grid.Column>
-        </Grid>
       </HiddenDiv>
 
 
