@@ -35,10 +35,10 @@ import { blue, pink, yellow } from "../constants.js"
 // S3 config
 const client = new S3Client({
   apiVersion: '2006-03-01',
-  region: process.env.AWS_REGION,
+  region: process.env.CLOUD_REGION,
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.CLOUD_ACCESS_KEY,
+    secretAccessKey: process.env.CLOUD_SECRET_ACCESS_KEY,
   }
 });
 
@@ -120,7 +120,7 @@ export const MenuFilters = () => {
 
     const input = {
       Body: fileData,
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: process.env.CLOUD_BUCKET_NAME,
       Key: ID_fileName,
       ContentType: fileContentType,
     };
