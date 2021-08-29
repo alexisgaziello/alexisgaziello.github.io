@@ -1,15 +1,7 @@
 
 
 // Fonts
-@font-face {
-    font-family: 'Billabong';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../fonts/Billabong/Billabong.woff') format('woff'),  /* Modern Browsers */
-         url('../fonts/Billabong/Billabong.eot'), /* IE9 Compat Modes */
-         url('../fonts/Billabong/Billabong.ttf')  format('truetype'); /* Safari, Android, iOS */
-}
-
+@import url('fonts/Billabong/stylesheet.css');
 @import url('fonts/Windsor/stylesheet.css');
 @import url('fonts/Sailors/web_font/sailors/stylesheet.css');
 @import url('fonts/Sailors/web_font/sailors_condensed/stylesheet.css');

@@ -67,13 +67,16 @@ export const MenuFilters = () => {
   const handleUploads = async (transactionID, payerEmail, payerName) => {
     // TODO: cancel if error?
     try {
-      const uploadFile1 = uploadFile(file1, transactionID);
-      // TODO: send email
-      if (filtersQty > 1) {
-        const uploadFile2 = uploadFile(file2, transactionID);
-        await uploadFile2;
-      }
-      await uploadFile1;
+      const sendEmailReq = sendEmail(payerEmail, transactionID, payerName, filtersQty);
+      // const uploadFile1 = uploadFile(file1, transactionID);
+
+      // if (filtersQty > 1) {
+      //   const uploadFile2 = uploadFile(file2, transactionID);
+      //   await uploadFile2;
+      // }
+      // await uploadFile1;
+
+      await sendEmailReq;
 
       // Success
       history.push(["/purchase-completed", "success", transactionID, payerName].join("/"));
@@ -126,6 +129,27 @@ export const MenuFilters = () => {
 
     return client.send(command);
   }
+
+  const sendEmail = (email, transactionID, name, filtersQty) => {
+
+    const requestBody = {
+        method: 'POST',
+        headers: new Headers({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify({
+            action: "sendEmail",
+            data: {
+                recipient: email,
+                transactionID: transactionID,
+                name: name,
+                filtersQty: filtersQty
+            }
+        }),
+    };
+    return fetch(process.env.SERVER_URL, requestBody);
+}
 
   const onError = (error) => {
     console.log(error)

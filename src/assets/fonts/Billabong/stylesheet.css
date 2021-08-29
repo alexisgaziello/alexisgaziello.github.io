@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Billabong';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./Billabong.woff') format('woff'),  /* Modern Browsers */
+         url('./Billabong.eot'), /* IE9 Compat Modes */
+         url('./Billabong.ttf')  format('truetype'); /* Safari, Android, iOS */
+}

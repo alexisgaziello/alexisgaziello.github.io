@@ -18,9 +18,6 @@ const paypalClientID = "AfZpSjF_LjZeSBrPcr3irvh5M0yIuqwOVu6zpFuzqY6e6Wt3PP3pe8FZ
 // Prod
 // const paypalClientID = "AQxgGUy6jazNlDtkwUw6tUkzvLK2NlWFClPcW49PlKWMqTmsIrGv-IY9qrr_odQUkaAveHhIZ2SiRDgl"
 
-//const paypalBackendURL = "http://localhost:9000/2015-03-31/functions/function/invocations"
-const paypalBackendURL = "https://qzgybsrz8h.execute-api.us-east-1.amazonaws.com/default/paypal-payment-backend-application"
-
 
 export const PaypalPaymentForm = ({
     filtersQty,
@@ -37,10 +34,15 @@ export const PaypalPaymentForm = ({
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }),
-            body: JSON.stringify({filtersQty: filtersQty}),
+            body: JSON.stringify({
+                action: "processPaypalOrder",
+                data: {
+                    filtersQty: filtersQty
+                }
+            }),
         };
         try {
-            const response = await fetch(paypalBackendURL, requestBody);
+            const response = await fetch(process.env.SERVER_URL, requestBody);
             const jsonResponse = await response.json();
             return jsonResponse.id;
         } catch (error) {
