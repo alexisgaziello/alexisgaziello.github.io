@@ -124,6 +124,7 @@ const App = () => {
                                     <List.Item>
                                         <List.Icon name='instagram' />
                                         <List.Content>
+                                            {/* TODO: complete */}
                                             <a href='https://www.instagram.com/TO_COMPLETE/?hl=en'>Instagram</a>
                                         </List.Content>
                                     </List.Item>

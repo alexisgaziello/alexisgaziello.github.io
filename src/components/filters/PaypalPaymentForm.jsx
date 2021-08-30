@@ -46,16 +46,12 @@ export const PaypalPaymentForm = ({
             const jsonResponse = await response.json();
             return jsonResponse.id;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             throw new Error(error);
         }
     }
 
     const onApprove = (data, actions) => {
-        console.log('data')
-        console.log(data)
-        console.log('actions')
-        console.log(actions)
         return actions.order.capture().then(function (details) {
             pushActiveStep();
             const payerName = [details.payer.name.given_name, details.payer.name.surname].join(" ");

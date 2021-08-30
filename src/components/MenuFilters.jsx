@@ -23,8 +23,6 @@ import { useHistory } from "react-router-dom";
 
 import { motion } from "framer-motion"
 
-import RadioOptions from './filters/RadioOptions.jsx'
-import QuestionSlider from './filters/QuestionSlider.jsx'
 import { Steps } from './filters/Steps.jsx'
 import { PaypalPaymentForm } from './filters/PaypalPaymentForm.jsx'
 import { UploadOptions } from './filters/UploadOptions.jsx'
@@ -68,13 +66,13 @@ export const MenuFilters = () => {
     // TODO: cancel if error?
     try {
       const sendEmailReq = sendEmail(payerEmail, transactionID, payerName, filtersQty);
-      // const uploadFile1 = uploadFile(file1, transactionID);
+      const uploadFile1 = uploadFile(file1, transactionID);
 
-      // if (filtersQty > 1) {
-      //   const uploadFile2 = uploadFile(file2, transactionID);
-      //   await uploadFile2;
-      // }
-      // await uploadFile1;
+      if (filtersQty > 1) {
+        const uploadFile2 = uploadFile(file2, transactionID);
+        await uploadFile2;
+      }
+      await uploadFile1;
 
       await sendEmailReq;
 
